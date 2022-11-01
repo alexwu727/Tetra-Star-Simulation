@@ -75,7 +75,7 @@ When a THero enters a MapBase, the following events can happen:
  
 ## Simulation
 In order to simulate and demonstrate a series of events which take place on Tetra, you may have to consider the notion of a TimeStep. On each Timestep, a number of things (see the description below) take place. For example, on one timeStep: 
-* ATetRover/TetHero/TetVader can move a step from one location to another adjacent location. 
+* A TetRover/TetHero/TetVader can move a step from one location to another adjacent location. 
 * A TetHero/TetVader can fly from one location to another location. 
 * A TetVader can steal a StarMap (empty the MapBase of its contents) and fly it to VaderBase. 
 * A TetHero can request to get a TFlier. 
