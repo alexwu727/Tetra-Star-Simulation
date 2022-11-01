@@ -79,10 +79,8 @@ In order to simulate and demonstrate a series of events which take place on Tetr
 * A TetHero/TetVader can fly from one location to another location. 
 * A TetVader can steal a StarMap (empty the MapBase of its contents) and fly it to VaderBase. 
 * A TetHero can request to get a TFlier. 
-* A TetHero can fly from his current location to VaderBase; he can 
-* send a signal to the StarMap. 
-* A TetHero can retrieve the StarMap from VaderBase, encrypt (see 
-* the description above) it and restore it to its base and fly back to his homebase.
+* A TetHero can fly from his current location to VaderBase; he can send a signal to the StarMap. 
+* A TetHero can retrieve the StarMap from VaderBase, encrypt (see the description above) it and restore it to its base and fly back to his homebase.
  
 ## Important Tasks
 1. Create and display Tetra surface (TFace) 
