@@ -33,6 +33,7 @@ public class Main {
         // tFace.addBase(2, 6, 4);
         // tFace.addBase(2, 8, 4);
         // tFace.printSurface();
+    	
         JFrame frame = new JFrame("Test title");
 
         frame.setSize(600, 600);
