@@ -1,7 +1,7 @@
 package main.java;
 
-import main.java.TetRover.TetHero;
-import main.java.TetRover.TetRover;
+import main.java.Inhabitant.TetHero;
+import main.java.Inhabitant.TetRover;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

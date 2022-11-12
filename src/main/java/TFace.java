@@ -3,7 +3,7 @@ package main.java;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.TetRover.TetRover;
+import main.java.Inhabitant.TetRover;
 
 public class TFace {
     private int rowSize;

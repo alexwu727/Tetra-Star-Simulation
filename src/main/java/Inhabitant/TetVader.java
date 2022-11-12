@@ -1,4 +1,4 @@
-package main.java.TetRover;
+package main.java.Inhabitant;
 
 public class TetVader extends TetRover {
     public TetVader(int row, int col, int tID) {

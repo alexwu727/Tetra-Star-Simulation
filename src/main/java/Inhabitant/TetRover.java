@@ -1,4 +1,4 @@
-package main.java.TetRover;
+package main.java.Inhabitant;
 
 import java.util.*;
 
