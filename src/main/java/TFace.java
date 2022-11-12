@@ -8,8 +8,8 @@ import main.java.Inhabitant.TetRover;
 public class TFace {
     private int rowSize;
     private int colSize;
-    public int Surface[][];
-    public Map<String, Integer> baseMap = new HashMap<String, Integer>();
+    public Locatable Surface[][];
+    public Map<String, Locatable> baseMap = new HashMap<String, Locatable>();
 
     public TFace(int row, int col) {
         rowSize = row;
@@ -25,26 +25,25 @@ public class TFace {
         return colSize;
     }
 
-    public void addObject(TetRover tetRover) {
-        int row = tetRover.getRow();
-        int col = tetRover.getCol();
-        Surface[row][col] = tetRover.getTID();
+    public void addObject(Locatable object) {
+        int row = object.getRow();
+        int col = object.getCol();
+        Surface[row][col] = object;
     }
 
-    public void removeObject(TetRover tetRover) {
-        int row = tetRover.getRow();
-        int col = tetRover.getCol();
+    public void removeObject(Locatable object) {
+        int row = object.getRow();
+        int col = object.getCol();
         String key = convertToKey(new int[] { row, col });
-        Surface[row][col] = baseMap.containsKey(key) ? baseMap.get(key) : 0;
+        Surface[row][col] = baseMap.containsKey(key) ? baseMap.get(key) : null;
     }
 
-    public void addBase(int row, int col, int baseID) {
+    public void addBase(Locatable object) {
+        int row = object.getRow();
+        int col = object.getCol();
         String key = convertToKey(new int[] { row, col });
-        baseMap.put(key, baseID);
-        if (baseMap.containsKey(key)) {
-            System.out.println(baseMap.get(key));
-        }
-        Surface[row][col] = baseID;
+        baseMap.put(key, object);
+        Surface[row][col] = object;
     }
 
     public String convertToKey(int[] arr) {
@@ -60,7 +59,7 @@ public class TFace {
     // }
 
     public void setSurfaceSize(int row, int col) {
-        Surface = new int[row][col];
+        Surface = new Locatable[row][col];
     }
 
     public void printSurface() {
