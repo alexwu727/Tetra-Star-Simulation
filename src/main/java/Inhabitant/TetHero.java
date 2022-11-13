@@ -1,4 +1,4 @@
-package main.java.TetRover;
+package main.java.Inhabitant;
 
 import main.java.TFace;
 
@@ -15,8 +15,7 @@ public class TetHero extends TetRover {
 
     @Override
     public boolean positionCheck(int row, int col) {
-        int tmp = tFace.Surface[row][col];
-        return (tmp == 0 || tmp == 4);
+        return !(tFace.Surface[row][col] instanceof Inhabitant);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class TetHero extends TetRover {
         // if (tFace.Surface[row][col] instanceof Base)
         // int mapID = tFace.Surface[row][col].getMapID();
         // encrypt(mapID)
-        if (tFace.Surface[row][col] == 4) {
+        if (tFace.Surface[row][col] instanceof Inhabitant) {
             System.out.println("Hero " + getTID() + " Found a map base.");
         }
     }
