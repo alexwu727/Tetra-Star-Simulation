@@ -1,8 +1,43 @@
 package main.java.Base;
 
-public class River extends Base {
+import main.java.Locatable;
+
+public class River implements Locatable {
+    private int row;
+    private int col;
+
     public River(int row, int col) {
-        super(row, col);
-        this.setDisplayID(9);
+        this.row = row;
+        this.col = col;
+    }
+
+    @Override
+    public void setRow(int row) {
+
+    }
+
+    @Override
+    public void setCol(int col) {
+
+    }
+
+    @Override
+    public void setDisplayID(int displayID) {
+
+    }
+
+    @Override
+    public int getRow() {
+        return 0;
+    }
+
+    @Override
+    public int getCol() {
+        return 0;
+    }
+
+    @Override
+    public int getDisplayID() {
+        return 0;
     }
 }

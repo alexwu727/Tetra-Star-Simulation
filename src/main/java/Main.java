@@ -22,7 +22,7 @@ public class Main {
 
         TFace tFace = new TFace(10, 10);
         List<TetRover> InhibitantList = new ArrayList<>();
-        MapBase b1 = new MapBase(8, 8);
+        MapBase b1 = new MapBase(8, 8, "8, 8", "d");
         TetRover t1 = new TetRover(3, 4, 1, tFace);
         TetHero t2 = new TetHero(5, 8, 2, tFace);
         TetHero t3 = new TetHero(1, 1, 3, tFace);

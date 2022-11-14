@@ -3,7 +3,7 @@ package main.java;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.Base.Base;
+import main.java.Base.*;
 import main.java.Inhabitant.TetRover;
 
 public class TFace {
@@ -41,17 +41,33 @@ public class TFace {
         Surface[row][col] = baseMap.containsKey(key) ? baseMap.get(key) : null;
     }
 
-    public void addBase(Base object) {
-        int row = object.getRow();
-        int col = object.getCol();
-        String key = convertToKey(new int[] { row, col });
-        baseMap.put(key, object);
-        Surface[row][col] = object;
+    public void addBase(Base base) {
+        int row = base.getRow();
+        int col = base.getCol();
+//        String key = convertToKey(new int[] { row, col });
+//        baseMap.put(key, object);
+        baseMap.put(base.getBID(), base);
+        Surface[row][col] = base;
     }
 
     public Base getBase(int row, int col) {
         String key = convertToKey(new int[] { row, col });
         return (Base) baseMap.get(key);
+    }
+
+    public void addRiver(int vbRow, int vbCol) {
+        int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        for(int[] direction :directions) {
+            int row = vbRow + direction[0];
+            int col = vbCol + direction[1];
+            // if not valid -> continue
+            if (row < 0 || row >= rowSize || col < 0 || col >= colSize) {
+                River river = new River(row, col);
+                Surface[row][col] = river;
+            }
+        }
+
     }
 
     public String convertToKey(int[] arr) {

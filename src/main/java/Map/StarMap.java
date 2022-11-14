@@ -1,17 +1,28 @@
-package main.java;
+package main.java.Map;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import main.java.Base.MapBase;
 import main.java.Inhabitant.TetHero;
+import main.java.TFace;
 
-public class StarMap {
-    private int displayID;
+public class StarMap extends Map {
+
     private int row;
     private int col;
+
+    public StarMap(int row, int col, String mID, String locID) {
+
+        super(row, col, mID, locID);
+        mapBase = new MapBase(row, col, mID, "StarMap");
+        mapBase.setMap(this);
+        mapBase.setDisplayID(7);
+//        tFace.addBase(mapBase);
+    }
+    private int displayID;
     private MapBase mapBase;
-    private int starMapID;
 
     private String text;
     private boolean isEncrypted;
@@ -20,16 +31,7 @@ public class StarMap {
     private int restorationCounter = 0;
     private List<Integer> heroList = new ArrayList<>();
 
-    public StarMap(TFace tFace, int row, int col, int starMapID, String text) {
-        this.row = row;
-        this.col = col;
-        this.starMapID = starMapID;
-        this.text = text;
-        mapBase = new MapBase(row, col);
-        mapBase.setStarMap(this);
-        mapBase.setDisplayID(7);
-        tFace.addBase(mapBase);
-    }
+
 
     public void setRow(int row) {
         this.row = row;
@@ -40,20 +42,30 @@ public class StarMap {
 
     }
 
+    @Override
+    public void setDisplayID(int displayID) {
+
+    }
+
     public int getRow() {
-        return row;
+        return this.row;
     }
 
     public int getCol() {
         return col;
     }
 
+    @Override
+    public int getDisplayID() {
+        return 0;
+    }
+
     public MapBase getMapBase() {
         return mapBase;
     }
 
-    public int getStarMapID() {
-        return starMapID;
+    public String getMID() {
+        return this.mID;
     }
 
     public String getText() {

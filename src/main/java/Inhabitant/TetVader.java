@@ -1,7 +1,7 @@
 package main.java.Inhabitant;
 
 import main.java.Locatable;
-import main.java.StarMap;
+import main.java.Map.*;
 import main.java.TFace;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
@@ -12,9 +12,11 @@ public class TetVader extends TetRover {
 
     public TetVader(int row, int col, int tID, TFace tFace) {
         super(row, col, tID, tFace);
-        vaderBase = new VaderBase(row, col);
+        String bID = tFace.convertToKey(new int[] { row, col });
+        vaderBase = new VaderBase(row, col, bID);
         vaderBase.setDisplayID(tID + 20);
         tFace.addBase(vaderBase);
+        tFace.addRiver(row, col);
         // TODO Auto-generated constructor stub
     }
 
@@ -52,10 +54,10 @@ public class TetVader extends TetRover {
     }
 
     public void steal(MapBase mapBase) {
-        StarMap starMap = mapBase.getStarMap();
+        Map starMap = mapBase.getMap();
         starMap.setRow(tFace.TetVaderBaseRow);
         starMap.setCol(tFace.TetVaderBaseCol);
-        mapBase.setStarMap(null);
+        mapBase.setMap(null);
     }
 
     public void backtrack() {
