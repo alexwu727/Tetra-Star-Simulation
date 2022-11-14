@@ -3,7 +3,7 @@ package main.java;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.Base.Base;
+import main.java.Base.*;
 import main.java.Inhabitant.TetRover;
 
 public class TFace {
@@ -52,6 +52,21 @@ public class TFace {
     public Base getBase(int row, int col) {
         String key = convertToKey(new int[] { row, col });
         return (Base) baseMap.get(key);
+    }
+
+    public void addRiver(int vbRow, int vbCol) {
+        int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        for(int[] direction :directions) {
+            int row = vbRow + direction[0];
+            int col = vbCol + direction[1];
+            // if not valid -> continue
+            if (row < 0 || row >= tFace.getRowSize() || col < 0 || col >= tFace.getColSize()) {
+                River river = new River(row, col);
+                Surface[row][col] = river;
+            }
+        }
+
     }
 
     public String convertToKey(int[] arr) {

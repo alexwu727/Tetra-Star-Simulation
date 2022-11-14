@@ -22,6 +22,8 @@ public class Main {
         // t2.setTFace(tFace);
         // t3.setTFace(tFace);
 
+//        MapBase mBase1 = new MapBase(2, 4, 6);
+
         // // System.out.println(t1.getRow() + " " + t1.getCol());
         // // let 1 be hero, 2 be vader, 3 be rover, 4 be
         // tFace.addObject(t1);

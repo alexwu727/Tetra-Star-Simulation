@@ -6,11 +6,10 @@ import main.java.Map.Map;
 
 public class HeroBase extends Base {
 
-    private ArrayList<Map> cloneList = null;
+    private ArrayList<Map> cloneMaps = null;
     public HeroBase(int row, int col, int heroBID){
         super(row, col, heroBID);
-        tFace.addObject(this);
-        cloneList = new ArrayList<Map>();
+        cloneMaps = new ArrayList<Map>();
     }
 
     public boolean checkID (TetHero hero) {
@@ -21,8 +20,9 @@ public class HeroBase extends Base {
         }
     }
 
-    public void clone (Map cloneMap) {
-        cloneList.add(cloneMap)
-
+    public void cloneMap (Map clone) {
+        if (clone != null) {
+            cloneMaps.add(clone);
+        }
     }
 }

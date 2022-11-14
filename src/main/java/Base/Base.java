@@ -20,30 +20,20 @@ public abstract class Base implements Locatable {
     }
 
     @Override
-    public void setCol(int col) {
-        this.col = col;
-
-    }
+    public void setCol(int col) { this.col = col; }
 
     @Override
-    public void setDisplayID(int displayID) {
-        this.displayID = displayID;
-
-    }
+    public int getRow() { return row; }
 
     @Override
-    public int getRow() {
-        return row;
-    }
+    public int getCol() { return col; }
+
+    public int getBID() { return bID; }
 
     @Override
-    public int getCol() {
-        return col;
-    }
+    public void setDisplayID(int displayID) { this.displayID = displayID; }
 
     @Override
-    public int getDisplayID() {
-        return displayID;
-    }
+    public int getDisplayID() { return displayID; }
 
 }

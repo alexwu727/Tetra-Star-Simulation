@@ -1,26 +1,33 @@
 package main.java.Base;
 
 import main.java.StarMap;
-
+import main.java.TFace;
 public class MapBase extends Base {
 
-    public MapBase(int row, int col, MapBID){
+    private boolean hasMap;
+    private Map map;
+
+    public MapBase(int row, int col, MapBID, TFace tFace){
         super(row, col, MapBID);
-        tFace.addObject(this);
-
-    }
-    private StarMap starMap;
-
-    public StarMap getStarMap() {
-        return starMap;
-    }
-
-    public void setStarMap(StarMap starMap) {
-        this.starMap = starMap;
+        tFace.addBase(this);
     }
 
     public boolean hasMap() {
-        return (starMap != null);
+        return hasMap;
     }
 
+    public void setMap (Map map) {
+        if (hasMap) { return; }
+        this.map = map;
+        this.hasMap = true;
+    }
+
+    public Map getMap() {
+        if (hasMap) {
+            Map temp = map;
+            map = null;
+            hasMap = false;
+            return temp;
+        }
+    }
 }

@@ -12,9 +12,10 @@ public class TetVader extends TetRover {
 
     public TetVader(int row, int col, int tID, TFace tFace) {
         super(row, col, tID, tFace);
-        vaderBase = new VaderBase(row, col);
+        vaderBase = new VaderBase(row, col, tID);
         vaderBase.setDisplayID(tID + 20);
         tFace.addBase(vaderBase);
+        tFace.addRiver(row, col);
         // TODO Auto-generated constructor stub
     }
 
