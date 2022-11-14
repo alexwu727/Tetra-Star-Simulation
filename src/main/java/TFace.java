@@ -46,7 +46,7 @@ public class TFace {
         int col = base.getCol();
 //        String key = convertToKey(new int[] { row, col });
 //        baseMap.put(key, object);
-        baseMap.put(base.getBID, base);
+        baseMap.put(base.getBID(), base);
         Surface[row][col] = base;
     }
 
@@ -62,7 +62,7 @@ public class TFace {
             int row = vbRow + direction[0];
             int col = vbCol + direction[1];
             // if not valid -> continue
-            if (row < 0 || row >= tFace.getRowSize() || col < 0 || col >= tFace.getColSize()) {
+            if (row < 0 || row >= rowSize || col < 0 || col >= colSize) {
                 River river = new River(row, col);
                 Surface[row][col] = river;
             }

@@ -1,9 +1,12 @@
 package main.java.Map;
 
+import main.java.Locatable;
+import java.util.HashMap;
 public abstract class Map implements Locatable{
-    private String mID;
+    String mID;
     private int row;
     private int col;
+    private String locID;
 
     private int itemCount;
 
@@ -15,7 +18,7 @@ public abstract class Map implements Locatable{
         this.col = col;
         this.mID = mID;
         this.locID = locID;
-        this.itemCount = 0
+        this.itemCount = 0;
     }
 
     @Override
@@ -32,7 +35,7 @@ public abstract class Map implements Locatable{
     @Override
     public int getCol() { return col; }
 
-    public String getMId(){ return mID; }
+    public String getMID(){ return mID; }
 
 
 }

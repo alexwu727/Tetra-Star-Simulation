@@ -1,18 +1,19 @@
 package main.java.Base;
 
-import main.java.StarMap;
+import main.java.Map.*;
 import main.java.TFace;
 public class MapBase extends Base {
 
     private boolean hasMap;
-    private Map map = null;
+    Map map = null;
 
     public MapBase(int row, int col, String MapBID, String type){
         super(row, col, MapBID);
-        if (type = "StarMap") {
-            map = new StarMap(row, col, MapBID);
-        } else if (type = "StarAtlas") {
-            map = new StarAtlas(row, col, MapBID);
+        String locID = "";
+        if (type == "StarMap") {
+            map = new StarMap(row, col, MapBID, locID);
+        } else if (type == "StarAtlas") {
+            map = new StarAltas(row, col, MapBID, locID);
         }
     }
 
@@ -27,11 +28,13 @@ public class MapBase extends Base {
     }
 
     public Map getMap() {
-        if (hasMap) {
-            Map temp = map;
-            map = null;
-            hasMap = false;
-            return temp;
+
+        if (! hasMap) {
+            return null;
         }
+        Map temp = map;
+        map = null;
+        hasMap = false;
+        return temp;
     }
 }

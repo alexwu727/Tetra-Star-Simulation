@@ -2,7 +2,7 @@ package main.java.Inhabitant;
 
 import java.util.Map;
 
-import main.java.StarMap;
+import main.java.Map.StarMap;
 import main.java.TFace;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
@@ -17,7 +17,7 @@ public class TetHero extends TetRover {
     public TetHero(int row, int col, int tID, TFace tFace) {
         super(row, col, tID, tFace);
         // only on the edge
-        String bID = TFace.convertToKey(new int[] { row, col });
+        String bID = tFace.convertToKey(new int[] { row, col });
         heroBase = new HeroBase(row, col, bID);
         heroBase.setDisplayID(tID + 10);
         tFace.addBase(heroBase);
@@ -53,7 +53,7 @@ public class TetHero extends TetRover {
                 System.out.println("Hero walks");
                 break;
             case 1:
-                actionToMap(((MapBase) tFace.getBase(getRow(), getCol())).getStarMap());
+                actionToMap((StarMap) ((MapBase) tFace.getBase(getRow(), getCol())).getMap());
                 System.out.println("action to map in the map base");
                 break;
             case 2:
@@ -142,7 +142,7 @@ public class TetHero extends TetRover {
         MapBase mapBase = starMap.getMapBase();
         starMap.setRow(mapBase.getRow());
         starMap.setCol(mapBase.getCol());
-        mapBase.setStarMap(starMap);
+        mapBase.setMap(starMap);
 
     }
 

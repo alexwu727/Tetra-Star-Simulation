@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6235099-cb5e-4e59-8894-6976cc6da290" name="Changes" comment="" />
+    <list default="true" id="c6235099-cb5e-4e59-8894-6976cc6da290" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Base/HeroBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/HeroBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Base/MapBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/MapBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Base/River.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/River.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Base/VaderBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/VaderBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Inhabitant/TetHero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhabitant/TetHero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Inhabitant/TetVader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhabitant/TetVader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Map/StarAltas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/StarAltas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Map/StarMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/StarMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Map/encryptedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/encryptedMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TFace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TFace.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,9 +39,29 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/JessicaWang/Desktop/2022 Fall/COEN 359/hw/Project/Tetra-Star-Simulation"
+    "jdk.selected.JAVA_MODULE": "15",
+    "last_opened_file_path": "/Users/JessicaWang/Desktop/2022 Fall/COEN 359/hw/Project/Tetra-Star-Simulation",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Tetra-Star-Simulation" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Tetra-Star-Simulation" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -36,5 +72,16 @@
       <updated>1668297651745</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
