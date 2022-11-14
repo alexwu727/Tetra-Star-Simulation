@@ -10,16 +10,18 @@ public class TetRover implements Locatable {
     private int displayID;
     private int row;
     private int col;
-    protected int TetVaderBaseRow;
-    protected int TetVaderBaseCol;
+    protected int nextAction;
 
     protected TFace tFace;
     int[][] directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
-    public TetRover(int row, int col, int tID) {
+    public TetRover(int row, int col, int tID, TFace tFace) {
         this.row = row;
         this.col = col;
         this.tID = tID;
+        this.tFace = tFace;
+        tFace.addObject(this);
+
     }
 
     public void setDisplayID(int displayID) {
@@ -39,14 +41,6 @@ public class TetRover implements Locatable {
         return row;
     }
 
-    public int getTetVaderBaseRow() {
-        return TetVaderBaseRow;
-    }
-
-    public int getTetVaderBaseCol() {
-        return TetVaderBaseCol;
-    }
-
     public int getCol() {
         return col;
     }
@@ -59,16 +53,17 @@ public class TetRover implements Locatable {
         this.col = c;
     }
 
-    public void setTFace(TFace tFace) {
-        this.tFace = tFace;
-    }
-
     public boolean positionCheck(int row, int col) {
         return !(tFace.Surface[row][col] instanceof Locatable);
     }
 
-    public void newPositionAction(int row, int col) {
+    public void setNextAction(int row, int col) {
+        this.nextAction = 0;
+    }
 
+    public void action() {
+        walk();
+        setNextAction(getRow(), getCol());
     }
 
     public void walk() {
@@ -90,7 +85,6 @@ public class TetRover implements Locatable {
         int[] newPosition = possiblePositions.get((int) (Math.random() * possiblePositions.size()));
         setRow(newPosition[0]);
         setCol(newPosition[1]);
-        newPositionAction(newPosition[0], newPosition[1]);
         tFace.addObject(this);
     }
 
