@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6235099-cb5e-4e59-8894-6976cc6da290" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Base/HeroBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/HeroBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Base/MapBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/MapBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Base/River.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/River.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Base/VaderBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/VaderBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Inhabitant/TetHero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhabitant/TetHero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Inhabitant/TetVader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhabitant/TetVader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Map/StarAltas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/StarAltas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Map/StarMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/StarMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Map/encryptedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/encryptedMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TFace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TFace.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
