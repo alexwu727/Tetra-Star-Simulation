@@ -2,14 +2,16 @@ package main.java.Base;
 
 import main.java.Locatable;
 
-public class Base implements Locatable {
+public abstract class Base implements Locatable {
     private int displayID;
     private int row;
     private int col;
+    private int bID;
 
-    public Base(int row, int col) {
+    public Base(int row, int col, int bID) {
         this.row = row;
         this.col = col;
+        this.bID = bID;
     }
 
     @Override
