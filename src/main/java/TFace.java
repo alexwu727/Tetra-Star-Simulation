@@ -3,6 +3,7 @@ package main.java;
 import java.util.HashMap;
 import java.util.Map;
 
+import main.java.Base.Base;
 import main.java.Inhabitant.TetRover;
 
 public class TFace {
@@ -10,6 +11,8 @@ public class TFace {
     private int colSize;
     public Locatable Surface[][];
     public Map<String, Locatable> baseMap = new HashMap<String, Locatable>();
+    public int TetVaderBaseRow;
+    public int TetVaderBaseCol;
 
     public TFace(int row, int col) {
         rowSize = row;
@@ -38,12 +41,17 @@ public class TFace {
         Surface[row][col] = baseMap.containsKey(key) ? baseMap.get(key) : null;
     }
 
-    public void addBase(Locatable object) {
+    public void addBase(Base object) {
         int row = object.getRow();
         int col = object.getCol();
         String key = convertToKey(new int[] { row, col });
         baseMap.put(key, object);
         Surface[row][col] = object;
+    }
+
+    public Base getBase(int row, int col) {
+        String key = convertToKey(new int[] { row, col });
+        return (Base) baseMap.get(key);
     }
 
     public String convertToKey(int[] arr) {
@@ -65,7 +73,8 @@ public class TFace {
     public void printSurface() {
         for (int i = 0; i < rowSize; i++) {
             for (int j = 0; j < colSize; j++) {
-                System.out.print(Surface[i][j] + " ");
+                int displayID = Surface[i][j] == null ? 0 : Surface[i][j].getDisplayID();
+                System.out.print(displayID + " ");
             }
             System.out.println();
         }
