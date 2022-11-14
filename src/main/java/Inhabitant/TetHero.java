@@ -17,7 +17,8 @@ public class TetHero extends TetRover {
     public TetHero(int row, int col, int tID, TFace tFace) {
         super(row, col, tID, tFace);
         // only on the edge
-        heroBase = new HeroBase(row, col, tID);
+        String bID = TFace.convertToKey(new int[] { row, col });
+        heroBase = new HeroBase(row, col, bID);
         heroBase.setDisplayID(tID + 10);
         tFace.addBase(heroBase);
     }

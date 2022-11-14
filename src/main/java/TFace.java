@@ -41,12 +41,13 @@ public class TFace {
         Surface[row][col] = baseMap.containsKey(key) ? baseMap.get(key) : null;
     }
 
-    public void addBase(Base object) {
-        int row = object.getRow();
-        int col = object.getCol();
-        String key = convertToKey(new int[] { row, col });
-        baseMap.put(key, object);
-        Surface[row][col] = object;
+    public void addBase(Base base) {
+        int row = base.getRow();
+        int col = base.getCol();
+//        String key = convertToKey(new int[] { row, col });
+//        baseMap.put(key, object);
+        baseMap.put(base.getBID, base);
+        Surface[row][col] = base;
     }
 
     public Base getBase(int row, int col) {

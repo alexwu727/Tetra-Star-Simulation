@@ -7,7 +7,7 @@ import main.java.Map.Map;
 public class HeroBase extends Base {
 
     private ArrayList<Map> cloneMaps = null;
-    public HeroBase(int row, int col, int heroBID){
+    public HeroBase(int row, int col, String heroBID){
         super(row, col, heroBID);
         cloneMaps = new ArrayList<Map>();
     }

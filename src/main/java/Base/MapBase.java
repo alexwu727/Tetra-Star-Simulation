@@ -5,11 +5,15 @@ import main.java.TFace;
 public class MapBase extends Base {
 
     private boolean hasMap;
-    private Map map;
+    private Map map = null;
 
-    public MapBase(int row, int col, MapBID, TFace tFace){
+    public MapBase(int row, int col, String MapBID, String type){
         super(row, col, MapBID);
-        tFace.addBase(this);
+        if (type = "StarMap") {
+            map = new StarMap(row, col, MapBID);
+        } else if (type = "StarAtlas") {
+            map = new StarAtlas(row, col, MapBID);
+        }
     }
 
     public boolean hasMap() {

@@ -12,7 +12,8 @@ public class TetVader extends TetRover {
 
     public TetVader(int row, int col, int tID, TFace tFace) {
         super(row, col, tID, tFace);
-        vaderBase = new VaderBase(row, col, tID);
+        String bID = TFace.convertToKey(new int[] { row, col });
+        vaderBase = new VaderBase(row, col, bID);
         vaderBase.setDisplayID(tID + 20);
         tFace.addBase(vaderBase);
         tFace.addRiver(row, col);

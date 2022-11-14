@@ -6,12 +6,13 @@ import java.util.List;
 import main.java.Base.MapBase;
 import main.java.Inhabitant.TetHero;
 
-public class StarMap {
+public class StarMap extends Map {
+
+    public StarMap(int row, int col, String mID, String locID) {
+        super(row, col, mID, locID);
+    }
     private int displayID;
-    private int row;
-    private int col;
     private MapBase mapBase;
-    private int starMapID;
 
     private String text;
     private boolean isEncrypted;
