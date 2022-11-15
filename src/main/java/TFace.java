@@ -44,10 +44,12 @@ public class TFace {
     public void addBase(Base base) {
         int row = base.getRow();
         int col = base.getCol();
-//        String key = convertToKey(new int[] { row, col });
-//        baseMap.put(key, object);
         baseMap.put(base.getBID(), base);
         Surface[row][col] = base;
+        if (base instanceof VaderBase) {
+            this.TetVaderBaseRow = row;
+            this.TetVaderBaseCol = col;
+        }
     }
 
     public Base getBase(int row, int col) {
@@ -56,9 +58,9 @@ public class TFace {
     }
 
     public void addRiver(int vbRow, int vbCol) {
-        int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int[][] directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
-        for(int[] direction :directions) {
+        for (int[] direction : directions) {
             int row = vbRow + direction[0];
             int col = vbCol + direction[1];
             // if not valid -> continue
