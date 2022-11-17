@@ -6,6 +6,7 @@ import main.java.Inhabitant.Inhabitant;
 import main.java.Inhabitant.TetHero;
 import main.java.Inhabitant.TetRover;
 import main.java.Inhabitant.TetVader;
+import main.java.Map.StarMap;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -20,27 +21,34 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args) {
 
-        TFace tFace = new TFace(10, 10);
+        TFace tFace = new TFace(4, 4);
         List<TetRover> InhibitantList = new ArrayList<>();
-        MapBase b1 = new MapBase(8, 8, "8, 8", "d");
-        TetRover t1 = new TetRover(3, 4, 1, tFace);
-        TetHero t2 = new TetHero(5, 8, 2, tFace);
-        TetHero t3 = new TetHero(1, 1, 3, tFace);
-        TetVader t4 = new TetVader(6, 7, 4, tFace);
+        StarMap m1 = new StarMap(1, 1, 0, tFace);
+        m1.setText("abcdefghijklmnopqrstuvwxyz");
+        TetHero t1 = new TetHero(0, 0, 1, tFace);
+        TetHero t2 = new TetHero(3, 3, 2, tFace);
+        TetVader t3 = new TetVader(3, 2, 3, tFace);
+        // TetHero t3 = new TetHero(1, 1, 3, tFace);
+        // TetVader t4 = new TetVader(6, 7, 4, tFace);
         t1.setDisplayID(1);
         t2.setDisplayID(2);
         t3.setDisplayID(3);
-        t4.setDisplayID(4);
+        // t4.setDisplayID(4);
 
         InhibitantList.add(t1);
         InhibitantList.add(t2);
         InhibitantList.add(t3);
-        InhibitantList.add(t4);
+        // InhibitantList.add(t4);
+        bar("Map");
+        tFace.printSurface();
+
         while (true) {
+            bar("Action");
             for (TetRover tetRover : InhibitantList) {
                 tetRover.action();
             }
-            bar();
+            bar("Map");
+
             tFace.printSurface();
             wait(1000);
         }
@@ -111,8 +119,8 @@ public class Main {
         }
     }
 
-    public static void bar() {
-        System.out.println("--------------------");
+    public static void bar(String str) {
+        System.out.println("-------------------- " + str + " --------------------");
     }
 
 }

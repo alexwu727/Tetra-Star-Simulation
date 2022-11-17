@@ -10,7 +10,7 @@ public class TFace {
     private int rowSize;
     private int colSize;
     public Locatable Surface[][];
-    public Map<String, Locatable> baseMap = new HashMap<String, Locatable>();
+    public Map<String, Base> baseMap = new HashMap<String, Base>();
     public int TetVaderBaseRow;
     public int TetVaderBaseCol;
 
@@ -37,7 +37,7 @@ public class TFace {
     public void removeObject(Locatable object) {
         int row = object.getRow();
         int col = object.getCol();
-        String key = convertToKey(new int[] { row, col });
+        String key = convertToKey(object.getRow(), object.getCol());
         Surface[row][col] = baseMap.containsKey(key) ? baseMap.get(key) : null;
     }
 
@@ -47,13 +47,14 @@ public class TFace {
         baseMap.put(base.getBID(), base);
         Surface[row][col] = base;
         if (base instanceof VaderBase) {
+            addRiver(row, col);
             this.TetVaderBaseRow = row;
             this.TetVaderBaseCol = col;
         }
     }
 
     public Base getBase(int row, int col) {
-        String key = convertToKey(new int[] { row, col });
+        String key = convertToKey(row, col);
         return (Base) baseMap.get(key);
     }
 
@@ -65,16 +66,17 @@ public class TFace {
             int col = vbCol + direction[1];
             // if not valid -> continue
             if (row < 0 || row >= rowSize || col < 0 || col >= colSize) {
-                River river = new River(row, col);
-                Surface[row][col] = river;
+                continue;
             }
+            River river = new River(row, col);
+            Surface[row][col] = river;
         }
 
     }
 
-    public String convertToKey(int[] arr) {
+    public String convertToKey(int row, int col) {
         StringBuilder sb = new StringBuilder();
-        sb.append(arr[0] + "," + arr[1]);
+        sb.append(row + "," + col);
         return sb.toString();
     }
 

@@ -3,27 +3,33 @@ package main.java.Base;
 import main.java.Locatable;
 import main.java.TFace;
 import main.java.Map.Map;
+import main.java.Map.StarMap;
+
 import java.util.HashMap;
 
 public class VaderBase extends Base {
 
-    private HashMap<String, Map> stolenMaps = null;
-    public VaderBase(int row, int col, String VaderBID){
+    private HashMap<Integer, StarMap> stolenMaps = null;
+
+    public VaderBase(int row, int col, String VaderBID) {
         super(row, col, VaderBID);
-        stolenMaps = new HashMap<String, Map>();
+        stolenMaps = new HashMap<Integer, StarMap>();
     }
 
-    public void stealMap (Map map) {
+    public HashMap<Integer, StarMap> getStolenMaps() {
+        return stolenMaps;
+    }
+
+    public void stealMap(StarMap map) {
         if (map != null) {
             stolenMaps.put(map.getMID(), map);
         }
     }
 
-    public Map removeMap (String mapID){
-        Map temp = stolenMaps.get(mapID);
+    public StarMap removeMap(int mapID) {
+        StarMap temp = stolenMaps.get(mapID);
         stolenMaps.remove(mapID);
         return temp;
     }
-
 
 }

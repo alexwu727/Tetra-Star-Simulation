@@ -1,6 +1,5 @@
 package main.java.Map;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,25 +12,25 @@ public class StarMap extends Map {
     private int row;
     private int col;
 
-    public StarMap(int row, int col, String mID, String locID) {
-
-        super(row, col, mID, locID);
-        mapBase = new MapBase(row, col, mID, "StarMap");
+    public StarMap(int row, int col, int mID, TFace tFace) {
+        super(row, col, mID, tFace);
+        String bID = tFace.convertToKey(row, col);
+        mapBase = new MapBase(row, col, bID);
         mapBase.setMap(this);
         mapBase.setDisplayID(7);
-//        tFace.addBase(mapBase);
+        tFace.addBase(mapBase);
     }
+
     private int displayID;
     private MapBase mapBase;
 
     private String text;
     private boolean isEncrypted;
     private String encryptSymbol = "*";
+
     private int encryptHeroID;
     private int restorationCounter = 0;
     private List<Integer> heroList = new ArrayList<>();
-
-
 
     public void setRow(int row) {
         this.row = row;
@@ -64,7 +63,7 @@ public class StarMap extends Map {
         return mapBase;
     }
 
-    public String getMID() {
+    public int getMID() {
         return this.mID;
     }
 
@@ -88,6 +87,10 @@ public class StarMap extends Map {
         this.encryptHeroID = encryptHeroID;
     }
 
+    public String getEncryptSymbol() {
+        return encryptSymbol;
+    }
+
     public int getRestorationCounter() {
         return restorationCounter;
     }
@@ -98,5 +101,13 @@ public class StarMap extends Map {
 
     public void addHero(TetHero tetHero) {
         heroList.add(tetHero.getTID());
+    }
+
+    public void encrpyt() {
+        isEncrypted = true;
+    }
+
+    public void decrpyt() {
+        isEncrypted = false;
     }
 }

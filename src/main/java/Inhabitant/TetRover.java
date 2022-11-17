@@ -4,12 +4,13 @@ import java.util.*;
 
 import main.java.Locatable;
 import main.java.TFace;
+import main.java.Base.MapBase;
 
 public class TetRover implements Locatable {
-    private int tID;
-    private int displayID;
-    private int row;
-    private int col;
+    protected int tID;
+    protected int displayID;
+    protected int row;
+    protected int col;
     protected int nextAction;
 
     protected TFace tFace;
@@ -57,17 +58,16 @@ public class TetRover implements Locatable {
         return !(tFace.Surface[row][col] instanceof Locatable);
     }
 
-    public void setNextAction(int row, int col) {
-        this.nextAction = 0;
+    public int nextActionEnterMapBase(MapBase mapBase) {
+        return 0;
     }
 
     public void action() {
         walk();
-        setNextAction(getRow(), getCol());
     }
 
     public void walk() {
-        tFace.removeObject(this);
+
         List<int[]> possiblePositions = new ArrayList<int[]>();
         for (int[] direction : directions) {
             int newRow = row + direction[0];
@@ -82,9 +82,20 @@ public class TetRover implements Locatable {
                 possiblePositions.add(tmp);
             }
         }
+        if (possiblePositions.size() == 0) {
+            System.out.println(getDisplayID() + " has no possible position to walk, stand for a round.");
+            return;
+        }
         int[] newPosition = possiblePositions.get((int) (Math.random() * possiblePositions.size()));
+        if (tFace.Surface[newPosition[0]][newPosition[1]] instanceof MapBase) {
+            this.nextAction = nextActionEnterMapBase((MapBase) tFace.Surface[newPosition[0]][newPosition[1]]);
+        } else {
+            this.nextAction = 0;
+        }
+        tFace.removeObject(this);
         setRow(newPosition[0]);
         setCol(newPosition[1]);
+        System.out.println(getDisplayID() + " walks to (" + newPosition[0] + ", " + newPosition[1] + ").");
         tFace.addObject(this);
     }
 

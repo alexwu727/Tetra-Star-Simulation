@@ -5,6 +5,7 @@ import main.java.Locatable;
 public class River implements Locatable {
     private int row;
     private int col;
+    private int displayID = 10;
 
     public River(int row, int col) {
         this.row = row;
@@ -38,6 +39,6 @@ public class River implements Locatable {
 
     @Override
     public int getDisplayID() {
-        return 0;
+        return displayID;
     }
 }
