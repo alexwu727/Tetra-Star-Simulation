@@ -1,7 +1,6 @@
 package main.java.Base;
 
 import main.java.Map.*;
-import main.java.TFace;
 
 public class MapBase extends Base {
 

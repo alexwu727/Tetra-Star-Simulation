@@ -1,10 +1,7 @@
 package main.java.Inhabitant;
 
 import java.util.Stack;
-
-import main.java.Locatable;
 import main.java.Map.*;
-import main.java.TFace;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
 import main.java.Base.VaderBase;

@@ -1,8 +1,5 @@
 package main.java.Base;
 
-import main.java.Locatable;
-import main.java.TFace;
-import main.java.Map.Map;
 import main.java.Map.StarMap;
 
 import java.util.HashMap;
