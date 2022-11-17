@@ -20,14 +20,14 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-
-        TFace tFace = new TFace(4, 4);
+        TFace tFace = TFace.instance();
+        tFace.setSurfaceSize(4, 4);
         List<TetRover> InhibitantList = new ArrayList<>();
         StarMap m1 = new StarMap(1, 1, 0, tFace);
         m1.setText("abcdefghijklmnopqrstuvwxyz");
-        TetHero t1 = new TetHero(0, 0, 1, tFace);
-        TetHero t2 = new TetHero(3, 3, 2, tFace);
-        TetVader t3 = new TetVader(3, 2, 3, tFace);
+        TetHero t1 = new TetHero(0, 0, 1);
+        TetHero t2 = new TetHero(3, 3, 2);
+        TetVader t3 = new TetVader(3, 2, 3);
         // TetHero t3 = new TetHero(1, 1, 3, tFace);
         // TetVader t4 = new TetVader(6, 7, 4, tFace);
         t1.setDisplayID(1);

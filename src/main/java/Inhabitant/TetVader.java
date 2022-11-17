@@ -13,8 +13,8 @@ public class TetVader extends TetRover {
     VaderBase vaderBase;
     Stack<int[]> moveStack = new Stack<>();
 
-    public TetVader(int row, int col, int tID, TFace tFace) {
-        super(row, col, tID, tFace);
+    public TetVader(int row, int col, int tID) {
+        super(row, col, tID);
         String bID = tFace.convertToKey(row, col);
         vaderBase = new VaderBase(row, col, bID);
         vaderBase.setDisplayID(tID + 20);

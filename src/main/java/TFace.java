@@ -7,6 +7,7 @@ import main.java.Base.*;
 import main.java.Inhabitant.TetRover;
 
 public class TFace {
+    private static TFace singleton = null;
     private int rowSize;
     private int colSize;
     public Locatable Surface[][];
@@ -14,10 +15,15 @@ public class TFace {
     public int TetVaderBaseRow;
     public int TetVaderBaseCol;
 
-    public TFace(int row, int col) {
-        rowSize = row;
-        colSize = col;
-        setSurfaceSize(row, col);
+    private TFace() {
+
+    }
+
+    public static TFace instance() {
+        if (singleton == null) {
+            singleton = new TFace();
+        }
+        return singleton;
     }
 
     public int getRowSize() {
@@ -87,6 +93,8 @@ public class TFace {
     // }
 
     public void setSurfaceSize(int row, int col) {
+        this.rowSize = row;
+        this.colSize = col;
         Surface = new Locatable[row][col];
     }
 

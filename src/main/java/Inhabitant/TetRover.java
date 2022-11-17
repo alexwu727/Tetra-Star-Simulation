@@ -12,15 +12,13 @@ public class TetRover implements Locatable {
     protected int row;
     protected int col;
     protected int nextAction;
-
-    protected TFace tFace;
+    protected TFace tFace = TFace.instance();;
     int[][] directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
-    public TetRover(int row, int col, int tID, TFace tFace) {
+    public TetRover(int row, int col, int tID) {
         this.row = row;
         this.col = col;
         this.tID = tID;
-        this.tFace = tFace;
         tFace.addObject(this);
 
     }
