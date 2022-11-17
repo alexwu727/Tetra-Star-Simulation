@@ -10,18 +10,17 @@ public abstract class Map implements Locatable {
     int mID;
     private int row;
     private int col;
-    private TFace tFace;
+    protected TFace tFace = TFace.instance();
     private MapBase mapBase;
     private int itemCount;
 
     private HashMap<String, String> header;
     private String body;
 
-    public Map(int row, int col, int mID, TFace tFace) {
+    public Map(int row, int col, int mID) {
         this.row = row;
         this.col = col;
         this.mID = mID;
-        this.tFace = tFace;
         this.itemCount = 0;
     }
 

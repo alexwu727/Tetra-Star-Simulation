@@ -12,8 +12,8 @@ public class StarMap extends Map {
     private int row;
     private int col;
 
-    public StarMap(int row, int col, int mID, TFace tFace) {
-        super(row, col, mID, tFace);
+    public StarMap(int row, int col, int mID) {
+        super(row, col, mID);
         String bID = tFace.convertToKey(row, col);
         mapBase = new MapBase(row, col, bID);
         mapBase.setMap(this);

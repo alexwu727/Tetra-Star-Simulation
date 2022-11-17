@@ -10,8 +10,8 @@ import main.java.Inhabitant.TetHero;
 public class StarAltas extends Map {
     private MapBase mapBase;
 
-    public StarAltas(int row, int col, int mID, TFace tFace) {
-        super(row, col, mID, tFace);
+    public StarAltas(int row, int col, int mID) {
+        super(row, col, mID);
         String bID = tFace.convertToKey(row, col);
         mapBase = new MapBase(row, col, bID);
         mapBase.setMap(this);

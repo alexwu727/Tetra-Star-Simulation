@@ -23,7 +23,7 @@ public class Main {
         TFace tFace = TFace.instance();
         tFace.setSurfaceSize(4, 4);
         List<TetRover> InhibitantList = new ArrayList<>();
-        StarMap m1 = new StarMap(1, 1, 0, tFace);
+        StarMap m1 = new StarMap(1, 1, 0);
         m1.setText("abcdefghijklmnopqrstuvwxyz");
         TetHero t1 = new TetHero(0, 0, 1);
         TetHero t2 = new TetHero(3, 3, 2);
