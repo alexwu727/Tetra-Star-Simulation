@@ -1,12 +1,13 @@
 package main.java.Inhabitant;
 
 import main.java.Map.StarMap;
+import main.java.Locatable;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
+import main.java.Base.River;
 import main.java.Base.VaderBase;
 
 public class TetHero extends TetRover {
-    int id;
     boolean tFlier;
     int cipherKey = 9;
     int findMapID;
@@ -15,15 +16,14 @@ public class TetHero extends TetRover {
     public TetHero(int row, int col, int tID) {
         super(row, col, tID);
         // only on the edge
-        String bID = tFace.convertToKey(row, col);
-        heroBase = new HeroBase(row, col, bID);
-        heroBase.setDisplayID(tID + 10);
+        heroBase = new HeroBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(heroBase);
     }
 
     @Override
     public boolean positionCheck(int row, int col) {
-        return !(tFace.Surface[row][col] instanceof TetRover);
+        Locatable object = tFace.Surface[row][col];
+        return !(object instanceof TetRover || object instanceof River);
     }
 
     @Override
@@ -36,7 +36,6 @@ public class TetHero extends TetRover {
         switch (nextAction) {
             case 0:
                 walk();
-                System.out.println("Hero walks");
                 break;
             case 1:
                 actionToMapInMapBase((StarMap) ((MapBase) tFace.getBase(getRow(), getCol())).getMap());
@@ -57,12 +56,11 @@ public class TetHero extends TetRover {
                 System.out.println("Hero retrieve the map, encrypt it, restore it, and flies back to his base.");
                 break;
         }
-        System.out.println("set next action " + this.nextAction);
     }
 
     public void actionToMapInMapBase(StarMap starMap) {
         if (starMap.isEncrypted()) {
-            if (starMap.getEncryptHeroID() != id) {
+            if (starMap.getEncryptHeroID() != tID) {
                 starMap.addHero(this);
                 System.out.println(
                         "Map in the map base is already encrypted by other hero, add id to the header and display encrypted content.");
@@ -167,6 +165,8 @@ public class TetHero extends TetRover {
     }
 
     public void cloneMap(StarMap starMap) {
+        StarMap clone = starMap.clone();
+        heroBase.cloneMap(clone);
 
     }
 

@@ -2,8 +2,10 @@ package main.java.Inhabitant;
 
 import java.util.Stack;
 import main.java.Map.*;
+import main.java.Locatable;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
+import main.java.Base.River;
 import main.java.Base.VaderBase;
 
 public class TetVader extends TetRover {
@@ -12,16 +14,16 @@ public class TetVader extends TetRover {
 
     public TetVader(int row, int col, int tID) {
         super(row, col, tID);
-        String bID = tFace.convertToKey(row, col);
-        vaderBase = new VaderBase(row, col, bID);
-        vaderBase.setDisplayID(tID + 20);
+        this.tFlier = true;
+        vaderBase = new VaderBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(vaderBase);
         moveStack.push(new int[] { row, col });
     }
 
     @Override
     public boolean positionCheck(int row, int col) {
-        return !(tFace.Surface[row][col] instanceof TetRover || tFace.Surface[row][col] instanceof HeroBase);
+        Locatable object = tFace.Surface[row][col];
+        return !(object instanceof TetRover || object instanceof HeroBase || object instanceof River);
     }
 
     @Override
@@ -39,6 +41,7 @@ public class TetVader extends TetRover {
             case 1:
                 System.out.println("Vader " + getDisplayID() + " steals the map in the map base.");
                 steal(((MapBase) tFace.getBase(getRow(), getCol())));
+                moveStack.pop();
                 break;
             case 2:
                 System.out.println("Vader " + getDisplayID() + " backtracks.");
@@ -58,6 +61,11 @@ public class TetVader extends TetRover {
 
     public void backtrack() {
         int[] pos = moveStack.pop();
+        // if there is a rover the the way back home, wait 1 round.
+        if (tFace.Surface[pos[0]][pos[1]] instanceof TetRover) {
+            moveStack.push(pos);
+            return;
+        }
         flyTo(pos[0], pos[1]);
         if (tFace.TetVaderBaseRow == pos[0] && tFace.TetVaderBaseCol == pos[1]) {
             this.nextAction = 0;

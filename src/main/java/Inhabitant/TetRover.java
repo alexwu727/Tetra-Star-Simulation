@@ -8,12 +8,14 @@ import main.java.Base.MapBase;
 
 public class TetRover implements Locatable {
     protected int tID;
-    protected int displayID;
+    protected String displayID;
     protected int row;
     protected int col;
     protected int nextAction;
-    protected TFace tFace = TFace.instance();;
+    protected TFace tFace = TFace.instance();
+    protected boolean tFlier = false;
     int[][] directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+    int[][] extraDirections = new int[][] { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
 
     public TetRover(int row, int col, int tID) {
         this.row = row;
@@ -23,12 +25,11 @@ public class TetRover implements Locatable {
 
     }
 
-    public void setDisplayID(int displayID) {
+    public void setDisplayID(String displayID) {
         this.displayID = displayID;
-
     }
 
-    public int getDisplayID() {
+    public String getDisplayID() {
         return displayID;
     }
 
@@ -64,8 +65,7 @@ public class TetRover implements Locatable {
         walk();
     }
 
-    public void walk() {
-
+    public List<int[]> possiblePositions(int[][] directions) {
         List<int[]> possiblePositions = new ArrayList<int[]>();
         for (int[] direction : directions) {
             int newRow = row + direction[0];
@@ -76,14 +76,27 @@ public class TetRover implements Locatable {
             }
             // check if there is other object there
             if (positionCheck(newRow, newCol)) {
-                int[] tmp = { newRow, newCol };
-                possiblePositions.add(tmp);
+                possiblePositions.add(new int[] { newRow, newCol });
             }
         }
+        return possiblePositions;
+    }
+
+    public void walk() {
+        List<int[]> possiblePositions = possiblePositions(directions);
         if (possiblePositions.size() == 0) {
-            System.out.println(getDisplayID() + " has no possible position to walk, stand for a round.");
-            return;
+            if (this.tFlier) {
+                possiblePositions = possiblePositions(extraDirections);
+                if (possiblePositions.size() == 0) {
+                    System.out.println(getDisplayID() + " has no possible position to walk, stand for a round.");
+                    return;
+                }
+            } else {
+                System.out.println(getDisplayID() + " has no possible position to walk, stand for a round.");
+                return;
+            }
         }
+
         int[] newPosition = possiblePositions.get((int) (Math.random() * possiblePositions.size()));
         if (tFace.Surface[newPosition[0]][newPosition[1]] instanceof MapBase) {
             this.nextAction = nextActionEnterMapBase((MapBase) tFace.Surface[newPosition[0]][newPosition[1]]);

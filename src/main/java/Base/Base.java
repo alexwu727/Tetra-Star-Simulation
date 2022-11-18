@@ -1,13 +1,12 @@
 package main.java.Base;
 
 import main.java.Locatable;
-import main.java.TFace;
 
 public abstract class Base implements Locatable {
-    private int displayID;
-    private int row;
-    private int col;
-    private String bID;
+    protected String displayID;
+    protected int row;
+    protected int col;
+    protected String bID;
 
     public Base(int row, int col, String bID) {
         this.row = row;
@@ -21,20 +20,32 @@ public abstract class Base implements Locatable {
     }
 
     @Override
-    public void setCol(int col) { this.col = col; }
+    public void setCol(int col) {
+        this.col = col;
+    }
 
     @Override
-    public int getRow() { return row; }
+    public int getRow() {
+        return row;
+    }
 
     @Override
-    public int getCol() { return col; }
+    public int getCol() {
+        return col;
+    }
 
-    public String getBID() { return bID; }
+    public String getBID() {
+        return bID;
+    }
 
     @Override
-    public void setDisplayID(int displayID) { this.displayID = displayID; }
+    public void setDisplayID(String displayID) {
+        this.displayID = displayID;
+    }
 
     @Override
-    public int getDisplayID() { return displayID; }
+    public String getDisplayID() {
+        return displayID;
+    }
 
 }

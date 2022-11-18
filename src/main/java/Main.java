@@ -24,15 +24,15 @@ public class Main {
         tFace.setSurfaceSize(4, 4);
         List<TetRover> InhibitantList = new ArrayList<>();
         StarMap m1 = new StarMap(1, 1, 0);
-        m1.setText("abcdefghijklmnopqrstuvwxyz");
+        m1.setText("hello world");
         TetHero t1 = new TetHero(0, 0, 1);
         TetHero t2 = new TetHero(3, 3, 2);
-        TetVader t3 = new TetVader(3, 2, 3);
+        TetVader t3 = new TetVader(3, 1, 3);
         // TetHero t3 = new TetHero(1, 1, 3, tFace);
         // TetVader t4 = new TetVader(6, 7, 4, tFace);
-        t1.setDisplayID(1);
-        t2.setDisplayID(2);
-        t3.setDisplayID(3);
+        t1.setDisplayID("H");
+        t2.setDisplayID("H");
+        t3.setDisplayID("V");
         // t4.setDisplayID(4);
 
         InhibitantList.add(t1);

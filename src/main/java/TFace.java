@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import main.java.Base.*;
-import main.java.Inhabitant.TetRover;
 
 public class TFace {
     private static TFace singleton = null;
@@ -74,7 +73,7 @@ public class TFace {
             if (row < 0 || row >= rowSize || col < 0 || col >= colSize) {
                 continue;
             }
-            River river = new River(row, col);
+            River river = new River(row, col, convertToKey(row, col));
             Surface[row][col] = river;
         }
 
@@ -86,12 +85,6 @@ public class TFace {
         return sb.toString();
     }
 
-    // public void setBase() {
-    // for (Map.Entry<Integer[], Integer> entry : baseMap.entrySet()) {
-    // Surface[entry.getKey()[0]][entry.getKey()[1]] = entry.getValue();
-    // }
-    // }
-
     public void setSurfaceSize(int row, int col) {
         this.rowSize = row;
         this.colSize = col;
@@ -101,7 +94,7 @@ public class TFace {
     public void printSurface() {
         for (int i = 0; i < rowSize; i++) {
             for (int j = 0; j < colSize; j++) {
-                int displayID = Surface[i][j] == null ? 0 : Surface[i][j].getDisplayID();
+                String displayID = Surface[i][j] == null ? "0" : Surface[i][j].getDisplayID();
                 System.out.print(displayID + " ");
             }
             System.out.println();
