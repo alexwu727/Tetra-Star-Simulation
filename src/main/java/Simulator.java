@@ -1,7 +1,6 @@
 package main.java;
 
 import main.java.Inhabitant.TetRover;
-import main.java.Scenario.Scenario;
 
 import java.util.HashMap;
 
@@ -15,17 +14,11 @@ public class Simulator {
         TFace tFace = TFace.instance();
         tFace.setSurfaceSize(scenario.sufaceRowSize, scenario.sufaceColSize);
         scenario.createInstances();
-        bar("Map");
-        tFace.printSurface();
-        while (true) {
-            bar("Action");
-            for (TetRover tetRover : scenario.inhibitantList) {
-                tetRover.action();
-            }
-            bar("Map");
+    }
 
-            tFace.printSurface();
-            wait(1000);
+    public static void nextFrame() {
+        for (TetRover tetRover : scenario.inhibitantList) {
+            tetRover.action();
         }
     }
 
