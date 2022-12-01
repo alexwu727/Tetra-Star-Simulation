@@ -16,7 +16,7 @@ public class BackendConsole {
         return TFace.instance().Surface;
     }
 
-    public static void AddConsole(String text) {
+    public static void addConsole(String text) {
         console += text + "\n";
     }
 

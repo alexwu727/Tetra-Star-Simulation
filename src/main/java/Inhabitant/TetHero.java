@@ -6,6 +6,7 @@ import main.java.Map.Map;
 
 import java.util.List;
 
+import main.java.BackendConsole;
 import main.java.Locatable;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
@@ -48,21 +49,19 @@ public class TetHero extends TetRover {
                 break;
             case 1:
                 actionToMapInMapBase(((MapBase) tFace.getBase(getRow(), getCol())).getMap());
-                System.out.println("action to map in the map base");
                 break;
             case 2:
                 requestTFlier();
-                System.out.println("Hero request a tFlier");
                 break;
             case 3:
                 flyTo(tFace.TetVaderBaseRow, tFace.TetVaderBaseCol);
-                System.out.println("Hero flies to tetVaderBase and check if the map is there.");
+                actionToConsole("Flies to tetVaderBase and check if the map is there.");
                 check(findMapID);
                 break;
             case 4:
                 actionToMapInVaderBase();
                 flyTo(heroBase.getRow(), heroBase.getCol());
-                System.out.println("Hero retrieve the map, encrypt it, restore it, and flies back to his base.");
+                actionToConsole("Flies back to his base.");
                 break;
         }
     }
@@ -71,14 +70,14 @@ public class TetHero extends TetRover {
         if (map.isEncrypted()) {
             if (map.getEncryptHeroID() != tID) {
                 map.addHero(this);
-                System.out.println(
-                        "Map in the map base is already encrypted by other hero, add id to the header and display encrypted content.");
+                actionToConsole(
+                        "Map in the map base is already encrypted by other hero, adds id to the header and displays encrypted content.");
             } else {
-                decrypt(map);
-                System.out.println("Display the decrpyted map in the map base.");
+                actionToConsole(
+                        "Map in the map base is already encrypted by me, displays the decrpyted map in the map base.");
             }
         } else {
-            System.out.println("Display unencrypted map in the map base.");
+            actionToConsole("Displays unencrypted map in the map base.");
         }
         display(map);
         this.nextAction = 0;
@@ -88,21 +87,22 @@ public class TetHero extends TetRover {
         if (map instanceof StarAltas) {
             StarAltas altas = (StarAltas) map;
             List<StarMap> starMaps = altas.getStarMaps();
-            System.out.println(starMaps.size());
+            BackendConsole.addConsole("" + starMaps.size());
             for (StarMap starMap : starMaps) {
                 display(starMap);
             }
         } else {
             printSymbol(map.getEncryptSymbol());
             String Date = "Dec 2022";
-            System.out.println("ID: " + map.getEncryptHeroID() + " Date: " + Date + " (Tetra Time)");
+            BackendConsole.addConsole("ID: " + map.getEncryptHeroID() + " Date: " + Date + " (Tetra Time)");
             String message = map.getText();
-            System.out.println("Text: " + message);
+            BackendConsole.addConsole("Text: " + message);
             printSymbol(map.getEncryptSymbol());
         }
     }
 
     public void requestTFlier() {
+        actionToConsole("Requests a tFlier");
         this.tFlier = true;
         this.nextAction = 3;
     }
@@ -120,7 +120,7 @@ public class TetHero extends TetRover {
             this.nextAction = 4;
         } else {
             this.nextAction = 0;
-            System.out.println("Where the hell map " + findMapID + " go?");
+            actionToConsole("Where the hell map " + findMapID + " go?");
         }
     }
 
@@ -131,17 +131,16 @@ public class TetHero extends TetRover {
         Map map = vaderBase.removeMap(findMapID);
         cloneMap(map);
         restore(map);
-        System.out.println("Clone and restore the map in the vader base.");
+        actionToConsole("Clones and restores the map in the vader base.");
         if (!map.isEncrypted()) {
             encrypt(map);
-            System.out.println("Encrypt the map in the vader base.");
-            display(map);
+            actionToConsole("Encrypts the map in the vader base.");
         } else if (map.getEncryptHeroID() != tID) {
             map.addHero(this);
-            System.out.println("Map in the vader base is already encrypted by other hero, add id to the header.");
+            actionToConsole("Map in the vader base is already encrypted by other hero, adds id to the header.");
         } else {
             incrementRestorationCounter(map);
-            System.out.println("Map in the vader base is already encrypted, increments the restoration_counter.");
+            actionToConsole("Map in the vader base is already encrypted, increments the restoration_counter.");
         }
         this.nextAction = 0;
     }
@@ -214,10 +213,11 @@ public class TetHero extends TetRover {
     }
 
     private void printSymbol(String symbol) {
-        for (int i = 0; i < 20; i++) {
-            System.out.print(symbol);
+        String border = "";
+        for (int i = 0; i < 30; i++) {
+            border += symbol;
         }
-        System.out.println();
+        BackendConsole.addConsole(border);
     }
 
 }
