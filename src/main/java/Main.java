@@ -2,7 +2,6 @@ package main.java;
 
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
-import main.java.Inhabitant.Inhabitant;
 import main.java.Inhabitant.TetHero;
 import main.java.Inhabitant.TetRover;
 import main.java.Inhabitant.TetVader;

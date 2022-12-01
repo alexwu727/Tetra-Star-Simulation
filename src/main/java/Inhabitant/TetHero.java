@@ -1,6 +1,11 @@
 package main.java.Inhabitant;
 
+import main.java.Map.StarAltas;
 import main.java.Map.StarMap;
+import main.java.Map.Map;
+
+import java.util.List;
+
 import main.java.Locatable;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
@@ -28,7 +33,11 @@ public class TetHero extends TetRover {
 
     @Override
     public int nextActionEnterMapBase(MapBase mapBase) {
-        return mapBase.hasMap() ? 1 : 2;
+        if (mapBase.hasMap()) {
+            return 1;
+        }
+        findMapID = mapBase.getMap().getMID();
+        return 2;
     }
 
     @Override
@@ -38,7 +47,7 @@ public class TetHero extends TetRover {
                 walk();
                 break;
             case 1:
-                actionToMapInMapBase((StarMap) ((MapBase) tFace.getBase(getRow(), getCol())).getMap());
+                actionToMapInMapBase(((MapBase) tFace.getBase(getRow(), getCol())).getMap());
                 System.out.println("action to map in the map base");
                 break;
             case 2:
@@ -58,30 +67,38 @@ public class TetHero extends TetRover {
         }
     }
 
-    public void actionToMapInMapBase(StarMap starMap) {
-        if (starMap.isEncrypted()) {
-            if (starMap.getEncryptHeroID() != tID) {
-                starMap.addHero(this);
+    public void actionToMapInMapBase(Map map) {
+        if (map.isEncrypted()) {
+            if (map.getEncryptHeroID() != tID) {
+                map.addHero(this);
                 System.out.println(
                         "Map in the map base is already encrypted by other hero, add id to the header and display encrypted content.");
             } else {
-                decrypt(starMap);
+                decrypt(map);
                 System.out.println("Display the decrpyted map in the map base.");
             }
         } else {
             System.out.println("Display unencrypted map in the map base.");
         }
-        display(starMap);
+        display(map);
         this.nextAction = 0;
     }
 
-    public void display(StarMap starMap) {
-        printSymbol(starMap.getEncryptSymbol());
-        String Date = "Dec 2022";
-        System.out.println("ID: " + starMap.getEncryptHeroID() + " Date: " + Date + " (Tetra Time)");
-        String message = starMap.getText();
-        System.out.println("Text: " + message);
-        printSymbol(starMap.getEncryptSymbol());
+    public void display(Map map) {
+        if (map instanceof StarAltas) {
+            StarAltas altas = (StarAltas) map;
+            List<StarMap> starMaps = altas.getStarMaps();
+            for (StarMap starMap : starMaps) {
+                encrypt(starMap);
+            }
+        } else {
+            printSymbol(map.getEncryptSymbol());
+            String Date = "Dec 2022";
+            System.out.println("ID: " + map.getEncryptHeroID() + " Date: " + Date + " (Tetra Time)");
+            String message = map.getText();
+            System.out.println("Text: " + message);
+            printSymbol(map.getEncryptSymbol());
+        }
     }
 
     public void requestTFlier() {
@@ -110,19 +127,19 @@ public class TetHero extends TetRover {
         this.tFlier = false;
         String key = tFace.convertToKey(getRow(), getCol());
         VaderBase vaderBase = (VaderBase) tFace.baseMap.get(key);
-        StarMap starMap = vaderBase.removeMap(findMapID);
-        cloneMap(starMap);
-        restore(starMap);
+        Map map = vaderBase.removeMap(findMapID);
+        cloneMap(map);
+        restore(map);
         System.out.println("Clone and restore the map in the vader base.");
-        if (!starMap.isEncrypted()) {
-            encrypt(starMap);
+        if (!map.isEncrypted()) {
+            encrypt(map);
             System.out.println("Encrypt the map in the vader base.");
-            display(starMap);
-        } else if (starMap.getEncryptHeroID() != tID) {
-            starMap.addHero(this);
+            display(map);
+        } else if (map.getEncryptHeroID() != tID) {
+            map.addHero(this);
             System.out.println("Map in the vader base is already encrypted by other hero, add id to the header.");
         } else {
-            incrementRestorationCounter(starMap);
+            incrementRestorationCounter(map);
             System.out.println("Map in the vader base is already encrypted, increments the restoration_counter.");
         }
         this.nextAction = 0;
@@ -143,35 +160,52 @@ public class TetHero extends TetRover {
         return result.toString();
     }
 
-    public void encrypt(StarMap starMap) {
-        String message = starMap.getText();
-        starMap.setText(caesarCipher(message, cipherKey));
-        starMap.encrpyt();
-        starMap.setEncryptHeroID(tID);
+    public void encrypt(Map map) {
+        if (map instanceof StarAltas) {
+            StarAltas altas = (StarAltas) map;
+            List<StarMap> starMaps = altas.getStarMaps();
+            for (StarMap starMap : starMaps) {
+                encrypt(starMap);
+            }
+        } else {
+            String message = map.getText();
+            map.setText(caesarCipher(message, cipherKey));
+            map.encrpyt();
+            map.setEncryptHeroID(tID);
+        }
+
     }
 
-    public void decrypt(StarMap starMap) {
-        String message = starMap.getText();
-        starMap.setText(caesarCipher(message, -cipherKey));
-        starMap.decrpyt();
-        starMap.setEncryptHeroID(0);
+    public void decrypt(Map map) {
+        if (map instanceof StarAltas) {
+            StarAltas altas = (StarAltas) map;
+            List<StarMap> starMaps = altas.getStarMaps();
+            for (StarMap starMap : starMaps) {
+                encrypt(starMap);
+            }
+        } else {
+            String message = map.getText();
+            map.setText(caesarCipher(message, -cipherKey));
+            map.decrpyt();
+            map.setEncryptHeroID(0);
+        }
     }
 
-    public void restore(StarMap starMap) {
-        MapBase mapBase = starMap.getMapBase();
-        starMap.setRow(mapBase.getRow());
-        starMap.setCol(mapBase.getCol());
-        mapBase.setMap(starMap);
+    public void restore(Map map) {
+        MapBase mapBase = map.getMapBase();
+        map.setRow(mapBase.getRow());
+        map.setCol(mapBase.getCol());
+        mapBase.setMap(map);
     }
 
-    public void cloneMap(StarMap starMap) {
-        StarMap clone = starMap.clone();
+    public void cloneMap(Map map) {
+        Map clone = map.clone();
         heroBase.cloneMap(clone);
 
     }
 
-    public void incrementRestorationCounter(StarMap starMap) {
-        starMap.setRestorationCounter(starMap.getRestorationCounter() + 1);
+    public void incrementRestorationCounter(Map map) {
+        map.setRestorationCounter(map.getRestorationCounter() + 1);
     }
 
     public void setHeroBase(HeroBase heroBase) {

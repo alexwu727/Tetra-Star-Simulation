@@ -1,6 +1,10 @@
 package main.java.Map;
 
+import java.util.List;
+
 public class StarAltas extends Map {
+    List<StarMap> starMaps;
+
     public StarAltas() {
 
     }
@@ -15,5 +19,13 @@ public class StarAltas extends Map {
 
     public StarAltas clone() {
         return new StarAltas(this);
+    }
+
+    public List<StarMap> getStarMaps() {
+        return starMaps;
+    }
+
+    public void addStarMaps(StarMap starMap) {
+        starMaps.add(starMap);
     }
 }
