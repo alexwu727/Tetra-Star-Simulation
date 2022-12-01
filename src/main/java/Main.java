@@ -5,6 +5,7 @@ import main.java.Base.MapBase;
 import main.java.Inhabitant.TetHero;
 import main.java.Inhabitant.TetRover;
 import main.java.Inhabitant.TetVader;
+import main.java.Map.StarAltas;
 import main.java.Map.StarMap;
 
 import javax.imageio.ImageIO;
@@ -22,8 +23,9 @@ public class Main {
         TFace tFace = TFace.instance();
         tFace.setSurfaceSize(4, 4);
         List<TetRover> InhibitantList = new ArrayList<>();
-        StarMap m1 = new StarMap(1, 1, 0);
-        m1.setText("hello world");
+        StarMap m1 = new StarMap(1, 1, 0, "hello world");
+        StarAltas m2 = new StarAltas(1, 2, 0, new int[] { 1, 2, 3, 4 }, new String[] { "hel", "lo", "wor", "ld" });
+
         TetHero t1 = new TetHero(0, 0, 1);
         TetHero t2 = new TetHero(3, 3, 2);
         TetVader t3 = new TetVader(3, 1, 3);
@@ -33,7 +35,8 @@ public class Main {
         t2.setDisplayID("H");
         t3.setDisplayID("V");
         // t4.setDisplayID(4);
-
+        // t1.display(m1);
+        t1.display(m2);
         InhibitantList.add(t1);
         InhibitantList.add(t2);
         InhibitantList.add(t3);
@@ -41,17 +44,17 @@ public class Main {
         bar("Map");
         tFace.printSurface();
 
-        while (true) {
-            bar("Action");
-            for (TetRover tetRover : InhibitantList) {
-                tetRover.action();
-            }
-            bar("Map");
+        // while (true) {
+        // bar("Action");
+        // for (TetRover tetRover : InhibitantList) {
+        // tetRover.action();
+        // }
+        // bar("Map");
 
-            tFace.printSurface();
-            wait(1000);
-        }
-        // TetRover t3 = new TetHero(1, 1);
+        // tFace.printSurface();
+        // wait(1000);
+        // }
+        // // TetRover t3 = new TetHero(1, 1);
         // // System.out.println(t1.getRow() + " " + t1.getCol());
         // // let 1 be hero, 2 be vader, 3 be rover, 4 be
         // tFace.addObject(t1);

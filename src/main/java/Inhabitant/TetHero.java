@@ -88,8 +88,9 @@ public class TetHero extends TetRover {
         if (map instanceof StarAltas) {
             StarAltas altas = (StarAltas) map;
             List<StarMap> starMaps = altas.getStarMaps();
+            System.out.println(starMaps.size());
             for (StarMap starMap : starMaps) {
-                encrypt(starMap);
+                display(starMap);
             }
         } else {
             printSymbol(map.getEncryptSymbol());
@@ -181,7 +182,7 @@ public class TetHero extends TetRover {
             StarAltas altas = (StarAltas) map;
             List<StarMap> starMaps = altas.getStarMaps();
             for (StarMap starMap : starMaps) {
-                encrypt(starMap);
+                decrypt(starMap);
             }
         } else {
             String message = map.getText();

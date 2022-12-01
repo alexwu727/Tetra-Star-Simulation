@@ -9,6 +9,11 @@ public class StarMap extends Map {
         super(row, col, mID);
     }
 
+    public StarMap(int row, int col, int mID, String text) {
+        super(row, col, mID);
+        this.setText(text);
+    }
+
     public StarMap(StarMap starMap) {
         super(starMap);
     }
