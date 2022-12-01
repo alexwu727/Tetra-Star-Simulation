@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6235099-cb5e-4e59-8894-6976cc6da290" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tetra-Star-Simulation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Tetra-Star-Simulation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/Base.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/Base.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/HeroBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/HeroBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/MapBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/MapBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/River.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/River.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/VaderBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Base/VaderBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Inhabitant/TetHero.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Inhabitant/TetHero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Inhabitant/TetRover.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Inhabitant/TetRover.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Inhabitant/TetVader.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Inhabitant/TetVader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Locatable.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Locatable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Map/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Map/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Map/StarAltas.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Map/StarAltas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Map/StarMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/Map/StarMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/TFace.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/Tetra-Star-Simulation/main/java/TFace.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,22 +45,16 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "jdk.selected.JAVA_MODULE": "15",
     "last_opened_file_path": "/Users/JessicaWang/Desktop/2022 Fall/COEN 359/hw/Project/Tetra-Star-Simulation",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.java.Main" />
       <module name="Tetra-Star-Simulation" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Tetra-Star-Simulation" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
