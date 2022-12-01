@@ -82,6 +82,39 @@ public class TetRover implements Locatable {
         return possiblePositions;
     }
 
+    public void setWalkDirections(int walkDirectionIndex) {
+        switch (walkDirectionIndex) {
+            case 0:
+                directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+                extraDirections = new int[][] { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
+                break;
+            // up
+            case 1:
+                directions = new int[][] { { -1, 0 } };
+                extraDirections = new int[][] { { -2, 0 } };
+                break;
+            // down
+            case 2:
+                directions = new int[][] { { 1, 0 } };
+                extraDirections = new int[][] { { 2, 0 } };
+                break;
+            // left
+            case 3:
+                directions = new int[][] { { 0, -1 } };
+                extraDirections = new int[][] { { 0, -2 } };
+                break;
+            // right
+            case 4:
+                directions = new int[][] { { 0, 1 } };
+                extraDirections = new int[][] { { 0, 2 } };
+                break;
+            default:
+                directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+                extraDirections = new int[][] { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
+                break;
+        }
+    }
+
     public void walk() {
         List<int[]> possiblePositions = possiblePositions(directions);
         if (possiblePositions.size() == 0) {
