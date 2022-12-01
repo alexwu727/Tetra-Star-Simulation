@@ -3,3 +3,4 @@
 production/**
 src/main/java/TestChild.java
 src/main/java/TestParent.java
+production
