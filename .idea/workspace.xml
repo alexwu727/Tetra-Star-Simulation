@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6235099-cb5e-4e59-8894-6976cc6da290" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/res/river.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BackendConsole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Scenario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Base/MapBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Base/MapBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Inhabitant/TetHero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhabitant/TetHero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Inhabitant/TetRover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhabitant/TetRover.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Inhabitant/TetVader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhabitant/TetVader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TFace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TFace.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
