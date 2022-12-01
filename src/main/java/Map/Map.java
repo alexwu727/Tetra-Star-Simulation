@@ -35,6 +35,7 @@ public abstract class Map {
         this.itemCount = 0;
         mapBase = new MapBase(row, col, tFace.convertToKey(row, col));
         mapBase.setMap(this);
+        mapBase.setMapID(mID);
         tFace.addBase(mapBase);
     }
 

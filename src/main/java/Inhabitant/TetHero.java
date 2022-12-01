@@ -36,7 +36,7 @@ public class TetHero extends TetRover {
         if (mapBase.hasMap()) {
             return 1;
         }
-        findMapID = mapBase.getMap().getMID();
+        findMapID = mapBase.getMapID();
         return 2;
     }
 

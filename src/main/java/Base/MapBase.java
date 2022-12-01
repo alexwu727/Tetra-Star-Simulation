@@ -6,6 +6,7 @@ public class MapBase extends Base {
 
     private boolean hasMap;
     Map map = null;
+    int mapID;
 
     public MapBase(int row, int col, String MapBID) {
         super(row, col, MapBID);
@@ -19,6 +20,14 @@ public class MapBase extends Base {
     public void setMap(Map map) {
         this.map = map;
         this.hasMap = map == null ? false : true;
+    }
+
+    public void setMapID(int mapID) {
+        this.mapID = mapID;
+    }
+
+    public int getMapID() {
+        return mapID;
     }
 
     public Map getMap() {
