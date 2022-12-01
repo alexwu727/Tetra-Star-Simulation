@@ -2,6 +2,7 @@ package main.java.Inhabitant;
 
 import java.util.*;
 
+import main.java.BackendConsole;
 import main.java.Locatable;
 import main.java.TFace;
 import main.java.Base.MapBase;
@@ -82,17 +83,50 @@ public class TetRover implements Locatable {
         return possiblePositions;
     }
 
+    public void setWalkDirections(int walkDirectionIndex) {
+        switch (walkDirectionIndex) {
+            case 0:
+                directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+                extraDirections = new int[][] { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
+                break;
+            // up
+            case 1:
+                directions = new int[][] { { -1, 0 } };
+                extraDirections = new int[][] { { -2, 0 } };
+                break;
+            // down
+            case 2:
+                directions = new int[][] { { 1, 0 } };
+                extraDirections = new int[][] { { 2, 0 } };
+                break;
+            // left
+            case 3:
+                directions = new int[][] { { 0, -1 } };
+                extraDirections = new int[][] { { 0, -2 } };
+                break;
+            // right
+            case 4:
+                directions = new int[][] { { 0, 1 } };
+                extraDirections = new int[][] { { 0, 2 } };
+                break;
+            default:
+                directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+                extraDirections = new int[][] { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
+                break;
+        }
+    }
+
     public void walk() {
         List<int[]> possiblePositions = possiblePositions(directions);
         if (possiblePositions.size() == 0) {
             if (this.tFlier) {
                 possiblePositions = possiblePositions(extraDirections);
                 if (possiblePositions.size() == 0) {
-                    System.out.println(getDisplayID() + " has no possible position to walk, stand for a round.");
+                    actionToConsole("Has no possible position to walk, stands for a round.");
                     return;
                 }
             } else {
-                System.out.println(getDisplayID() + " has no possible position to walk, stand for a round.");
+                actionToConsole("Has no possible position to walk, stands for a round.");
                 return;
             }
         }
@@ -106,8 +140,11 @@ public class TetRover implements Locatable {
         tFace.removeObject(this);
         setRow(newPosition[0]);
         setCol(newPosition[1]);
-        System.out.println(getDisplayID() + " walks to (" + newPosition[0] + ", " + newPosition[1] + ").");
+        actionToConsole("Walks to (" + newPosition[0] + ", " + newPosition[1] + ").");
         tFace.addObject(this);
     }
 
+    public void actionToConsole(String text) {
+        BackendConsole.addConsole(this.getClass().getSimpleName() + " " + tID + ": " + text);
+    }
 }

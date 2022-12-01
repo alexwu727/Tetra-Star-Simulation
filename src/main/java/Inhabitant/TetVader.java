@@ -39,12 +39,12 @@ public class TetVader extends TetRover {
                 moveStack.push(new int[] { getRow(), getCol() });
                 break;
             case 1:
-                System.out.println("Vader " + getDisplayID() + " steals the map in the map base.");
+                actionToConsole("Steals the map in the map base.");
                 steal(((MapBase) tFace.getBase(getRow(), getCol())));
                 moveStack.pop();
                 break;
             case 2:
-                System.out.println("Vader " + getDisplayID() + " backtracks.");
+                actionToConsole(" Backtracks.");
                 backtrack();
                 break;
         }

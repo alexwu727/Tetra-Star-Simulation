@@ -26,6 +26,10 @@ public class TFace {
         return singleton;
     }
 
+    public static void clear() {
+        singleton = null;
+    }
+
     public int getRowSize() {
         return rowSize;
     }
