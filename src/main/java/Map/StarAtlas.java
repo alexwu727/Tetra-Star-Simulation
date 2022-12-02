@@ -3,37 +3,36 @@ package main.java.Map;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StarAltas extends Map {
+public class StarAtlas extends Map {
     List<StarMap> starMaps;
 
-    public StarAltas() {
+    public StarAtlas() {
 
     }
 
-    public StarAltas(int row, int col, int mID) {
+    public StarAtlas(int row, int col, int mID) {
         super(row, col, mID);
         starMaps = new ArrayList<StarMap>();
     }
 
-    public StarAltas(int row, int col, int mID, int[] mIDs, String[] texts) {
+    public StarAtlas(int row, int col, int mID, int[] mIDs, String[] texts) {
         super(row, col, mID);
-        this.setDisplayID("StarAltas");
+        this.setDisplayID("StarAtlas");
         tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
         starMaps = new ArrayList<StarMap>();
         for (int i = 0; i < mIDs.length; i++) {
             StarMap starMap = new StarMap(row, col, mIDs[i], texts[i]);
             this.addStarMaps(starMap);
-            this.setDisplayID("StarAltas");
             // tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
         }
     }
 
-    public StarAltas(StarAltas starAltas) {
-        super(starAltas);
+    public StarAtlas(StarAtlas starAtlas) {
+        super(starAtlas);
     }
 
-    public StarAltas clone() {
-        return new StarAltas(this);
+    public StarAtlas clone() {
+        return new StarAtlas(this);
     }
 
     public List<StarMap> getStarMaps() {

@@ -21,7 +21,7 @@ public class SimulationWindow {
     ImageIcon heroBase;
     ImageIcon mapBase;
     ImageIcon starMap;
-    ImageIcon starAltas;
+    ImageIcon starAtlas;
     ImageIcon cloneMap;
     ImageIcon vader;
     ImageIcon vaderBase;
@@ -70,7 +70,7 @@ public class SimulationWindow {
         heroBase = new ImageIcon(((new ImageIcon("res/hero_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         mapBase = new ImageIcon(((new ImageIcon("res/map_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         starMap = new ImageIcon(((new ImageIcon("res/star_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        starAltas = new ImageIcon(((new ImageIcon("res/star_altas.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
+        starAtlas = new ImageIcon(((new ImageIcon("res/star_altas.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         cloneMap = new ImageIcon(((new ImageIcon("res/clone_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vader = new ImageIcon(((new ImageIcon("res/vader.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vaderBase = new ImageIcon(((new ImageIcon("res/vader_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
@@ -125,14 +125,11 @@ public class SimulationWindow {
                             case "VaderBase":
                                 crowded.add(new JLabel(vaderBase));
                                 break;
-//                            case "StarMap":
-//                                crowded.add(new JLabel(starMap));
-//                                break;
-//                            case "StarAltas":
-//                                crowded.add(new JLabel(starAltas));
-//                                break;
-                            case "Map":
+                            case "StarMap":
                                 crowded.add(new JLabel(starMap));
+                                break;
+                            case "StarAtlas":
+                                crowded.add(new JLabel(starAtlas));
                                 break;
                             case "MapBase":
                                 crowded.add(new JLabel(mapBase));

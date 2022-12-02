@@ -56,7 +56,7 @@ public class Simulator {
         scenario.addTetRoverArgs(2, 3, 4, 0);
         scenario.addTetRoverArgs(9, 8, 5, 0);
         scenario.addStarMapArgs(7, 2, 0, "hello world");
-        scenario.addStarAltasArgs(2, 7, 0, new int[] { 1, 2, 3, 4 }, new String[] { "hel", "lo", "wor", "ld" });
+        scenario.addStarAtlasArgs(2, 7, 0, new int[] { 1, 2, 3, 4 }, new String[] { "hel", "lo", "wor", "ld" });
         scenarioHashMap.put(0, scenario);
 
         // scenario 1 - hero enters the mapbase with a map

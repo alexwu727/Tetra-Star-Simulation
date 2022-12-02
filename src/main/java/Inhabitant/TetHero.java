@@ -1,6 +1,6 @@
 package main.java.Inhabitant;
 
-import main.java.Map.StarAltas;
+import main.java.Map.StarAtlas;
 import main.java.Map.StarMap;
 import main.java.Map.Map;
 
@@ -85,9 +85,9 @@ public class TetHero extends TetRover {
     }
 
     public void display(Map map) {
-        if (map instanceof StarAltas) {
-            StarAltas altas = (StarAltas) map;
-            List<StarMap> starMaps = altas.getStarMaps();
+        if (map instanceof StarAtlas) {
+            StarAtlas atlas = (StarAtlas) map;
+            List<StarMap> starMaps = atlas.getStarMaps();
             BackendConsole.addConsole("" + starMaps.size());
             for (StarMap starMap : starMaps) {
                 display(starMap);
@@ -165,9 +165,9 @@ public class TetHero extends TetRover {
     }
 
     public void encrypt(Map map) {
-        if (map instanceof StarAltas) {
-            StarAltas altas = (StarAltas) map;
-            List<StarMap> starMaps = altas.getStarMaps();
+        if (map instanceof StarAtlas) {
+            StarAtlas atlas = (StarAtlas) map;
+            List<StarMap> starMaps = atlas.getStarMaps();
             for (StarMap starMap : starMaps) {
                 encrypt(starMap);
             }
@@ -181,9 +181,9 @@ public class TetHero extends TetRover {
     }
 
     public void decrypt(Map map) {
-        if (map instanceof StarAltas) {
-            StarAltas altas = (StarAltas) map;
-            List<StarMap> starMaps = altas.getStarMaps();
+        if (map instanceof StarAtlas) {
+            StarAtlas atlas = (StarAtlas) map;
+            List<StarMap> starMaps = atlas.getStarMaps();
             for (StarMap starMap : starMaps) {
                 decrypt(starMap);
             }
