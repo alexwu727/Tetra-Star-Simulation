@@ -23,7 +23,7 @@ public class TetRover implements Locatable {
         this.col = col;
         this.tID = tID;
         tFace.addObject(this);
-        this.setDisplayID("Rover" + tID);
+        this.setDisplayID("TetRover" + tID);
     }
 
     public void setDisplayID(String displayID) {
