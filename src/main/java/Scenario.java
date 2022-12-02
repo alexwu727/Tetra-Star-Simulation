@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import main.java.Inhabitant.TetHero;
@@ -40,6 +41,7 @@ public class Scenario {
     }
 
     public void createInstances() {
+        inhibitantList.clear();
         for (int i = 0; i < tetRoverArgsList.size(); i++) {
             int[] tetRoverArgs = tetRoverArgsList.get(i);
             TetRover tetRover = new TetRover(tetRoverArgs[0], tetRoverArgs[1], tetRoverArgs[2]);

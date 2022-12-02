@@ -1,14 +1,6 @@
 package main.java.GUI;
 
 import main.java.BackendConsole;
-import main.java.Base.HeroBase;
-import main.java.Base.MapBase;
-import main.java.Base.River;
-import main.java.Base.VaderBase;
-import main.java.Inhabitant.TetHero;
-import main.java.Inhabitant.TetRover;
-import main.java.Inhabitant.TetVader;
-import main.java.Locatable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class SimulationWindow {
@@ -43,12 +34,11 @@ public class SimulationWindow {
     SimulationWindow(String scene) {
 
         displayHashMap = BackendConsole.getDisplayHashMap();
-        System.out.println(displayHashMap);
         row = BackendConsole.getRowSize();
         col = BackendConsole.getColSize();
 
         frame = new JFrame("Simulation Scenario " + scene);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
