@@ -28,6 +28,7 @@ public class SimulationWindow {
     ImageIcon heroBase;
     ImageIcon mapBase;
     ImageIcon starMap;
+    ImageIcon cloneMap;
     ImageIcon vader;
     ImageIcon vaderBase;
     ImageIcon rover;
@@ -74,6 +75,7 @@ public class SimulationWindow {
         heroBase = new ImageIcon(((new ImageIcon("res/hero_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         mapBase = new ImageIcon(((new ImageIcon("res/map_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         starMap = new ImageIcon(((new ImageIcon("res/star_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
+        cloneMap = new ImageIcon(((new ImageIcon("res/clone_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vader = new ImageIcon(((new ImageIcon("res/vader.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vaderBase = new ImageIcon(((new ImageIcon("res/vader_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         rover = new ImageIcon(((new ImageIcon("res/man1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
@@ -86,7 +88,7 @@ public class SimulationWindow {
                 draw(mapPanel);
                 String res = BackendConsole.getConsole();
                 stepCount += 1;
-                output.append("========================= Step "+stepCount+" =========================\n" + res + "--------------------------------------------------------\n\n");
+                output.append("========================= Step "+stepCount+" =========================\n" + res + "======================================================\n\n");
             }
         });
         mapPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -108,7 +110,20 @@ public class SimulationWindow {
 
 
                 if (map[i][j] instanceof HeroBase) {
-                    canvas[i][j] = new JLabel(heroBase);
+                    JLabel crowded = new JLabel();
+                    crowded.setLayout(new BoxLayout(crowded, BoxLayout.X_AXIS));
+                    JLabel roommate1 = new JLabel();
+                    JLabel roommate2 = new JLabel();
+                    JLabel roommate3 = new JLabel();
+                    roommate1.setIcon(heroBase);
+                    roommate2.setIcon(vader);
+                    roommate3.setIcon(starMap);
+
+                    crowded.add(roommate1);
+                    crowded.add(roommate3);
+                    crowded.add(roommate2);
+                    canvas[i][j] = crowded;
+//                    canvas[i][j] = new JLabel(heroBase);
                 }
                 else if (map[i][j] instanceof TetHero) {
                     canvas[i][j] = new JLabel(hero);
