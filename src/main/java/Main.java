@@ -2,6 +2,7 @@ package main.java;
 
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
+import main.java.GUI.MainFrame;
 import main.java.Inhabitant.TetHero;
 import main.java.Inhabitant.TetRover;
 import main.java.Inhabitant.TetVader;
@@ -20,20 +21,7 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        BackendConsole.buildSimulator();
-        BackendConsole.simulateScenario(2);
-        TFace tFace = TFace.instance();
-        bar("Map");
-        tFace.printSurface();
-        while (true) {
-            BackendConsole.nextFrame();
-            bar("Action");
-            System.out.println(BackendConsole.getConsole());
-            bar("Map");
-            tFace.printSurface();
-            // BackendConsole.getSurface().printSurface();
-            wait(1000);
-        }
+        new MainFrame();
     }
 
     public static void wait(int ms) {

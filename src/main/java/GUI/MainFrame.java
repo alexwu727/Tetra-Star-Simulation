@@ -1,6 +1,8 @@
 package main.java.GUI;
 
 
+import main.java.BackendConsole;
+import main.java.Main;
 import main.java.TFace;
 
 import java.awt.*;
@@ -10,111 +12,60 @@ import java.util.Random;
 import javax.swing.*;
 
 public class MainFrame{
-    JFrame frame;
 //    MainFrame(TFace surface){
     // HashMap<String, Object>
-    MainFrame(int[][] map){
-
-//        int row = surface.getRowSize();
-//        int col = surface.getColSize();
-        int row = map.length;
-        int col = map[0].length;
-
-        frame = new JFrame("Tetra Star Simulation");
+    public MainFrame() {
+        JFrame frame = new JFrame ("Compass");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new GridLayout(4, 1));
+        JButton scenario1 = new JButton ("scenario 1");
+        JButton scenario2 = new JButton ("scenario 2");
+        JButton scenario3 = new JButton ("scenario 3");
+        JButton scenario4 = new JButton ("scenario 4");
+        frame.add (scenario1);
+        frame.add (scenario2);
+        frame.add (scenario3);
+        frame.add (scenario4);
 
-        JPanel container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-
-        JPanel mapPanel = new JPanel(new GridLayout(row, col, -1, -1));
-        mapPanel.setBackground(Color.gray);
-        mapPanel.setPreferredSize(new Dimension(500, 500));
-
-        JPanel buttonPanel = new JPanel();
-        JButton nextAction = new JButton("Next Action");
-        buttonPanel.add(nextAction);
-
-        JPanel printPanel = new JPanel();
-        JTextArea output = new JTextArea("", 12, 60);
-        JScrollPane scroll = new JScrollPane(output);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        printPanel.add(scroll);
-        printPanel.setPreferredSize(new Dimension(500, 300));
-
-        container.add(mapPanel);
-        container.add(buttonPanel);
-        container.add(printPanel);
-
-        frame.getContentPane().add(container);
         frame.pack();
-        Random rand = new Random();
+        frame.setVisible(true);
+        BackendConsole.buildSimulator();
 
-        nextAction.addActionListener(new ActionListener() {
+        scenario1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                output.append(rand.nextInt(1000)+"\n");
 
+                BackendConsole.simulateScenario(0);
+                new SimulationWindow();
             }
         });
-
-        ImageIcon river = new ImageIcon(((new ImageIcon("res/river.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        ImageIcon hero = new ImageIcon(((new ImageIcon("res/hero.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        ImageIcon heroBase = new ImageIcon(((new ImageIcon("res/hero_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        ImageIcon mapBase = new ImageIcon(((new ImageIcon("res/map_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        ImageIcon starMap = new ImageIcon(((new ImageIcon("res/star_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        ImageIcon vader = new ImageIcon(((new ImageIcon("res/vader.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        ImageIcon vaderBase = new ImageIcon(((new ImageIcon("res/vader_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        ImageIcon rover = new ImageIcon(((new ImageIcon("res/man1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-
-        mapPanel.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-
-        JLabel initMap[][] = new JLabel[row][col];
-
-        for (int i = 0; i < row; i++){
-            for (int j = 0; j < col; j++) {
-                initMap[i][j] = new JLabel();
-                switch (map[i][j]) {
-                    case 11:
-                        initMap[i][j] = new JLabel(hero);
-                        break;
-                    case 22:
-                        initMap[i][j] = new JLabel(vaderBase);
-                        break;
-                    case 33:
-                        initMap[i][j] = new JLabel(mapBase);
-                        break;
-                    case -1:
-                        initMap[i][j] = new JLabel(river);
-                        break;
-                    default:
-                        initMap[i][j] = new JLabel("");
-                        break;
-                }
-                initMap[i][j].setBorder(BorderFactory.createLineBorder(Color.white));
-                mapPanel.add(initMap[i][j]);
-
-
-////                Locatable obj = surface.Surface[i][j];
-////                if (obj instanceof HeroBase) {
+        scenario2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BackendConsole.simulateScenario(1);
+                new SimulationWindow();
             }
-        }
+        });
+        scenario3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BackendConsole.simulateScenario(2);
+                new SimulationWindow();
+            }
+        });
+        scenario4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BackendConsole.simulateScenario(3);
+                new SimulationWindow();
+            }
+        });
+        frame.setSize(400,600);
 
-        frame.setSize(800,800);
-        frame.setVisible(true);
     }
     public static void main(String[] args) {
-        int[][] map = {{0,0,0,33,0,0,0,0,0,0},
-                {0,0,0,0,1,0,0,3,0,0},
-                {111,0,0,4,0,0,0,0,0,11},
-                {0,2,0,0,0,4,0,3,-1,0},
-                {0,0,0,0,0,0,0,-1,22,-1},
-                {0,0,0,33,0,0,0,0,-1,0},
-                {0,0,0,0,0,1,0,0,0,0},
-                {0,1,0,0,0,0,0,0,0,0},
-                {0,0,0,3,0,0,0,0,1,0},
-                {11,0,0,0,0,0,0,0,11,0}};
-        new MainFrame(map);
 
+        new MainFrame();
 
     }
 }
