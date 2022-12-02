@@ -204,8 +204,8 @@ public class TetHero extends TetRover {
     public void cloneMap(Map map) {
         Map clonedMap = map.clone();
         clonedMap.setDisplayID("CloneMap");
-        tFace.mapMap.put(tFace.convertToKey(clonedMap.getRow(), clonedMap.getCol()), clonedMap.getDisplayID());
         heroBase.cloneMap(clonedMap);
+        tFace.mapMap.put(tFace.convertToKey(clonedMap.getRow(), clonedMap.getCol()), clonedMap.getDisplayID());
 
     }
 
