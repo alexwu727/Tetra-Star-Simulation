@@ -39,6 +39,7 @@ public abstract class Map implements Locatable {
         mapBase.setMap(this);
         mapBase.setMapID(mID);
         tFace.addBase(mapBase);
+        tFace.addObject(mapBase);
         this.setDisplayID("Map");
         tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
     }
