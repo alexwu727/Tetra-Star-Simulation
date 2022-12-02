@@ -32,15 +32,17 @@ public class SimulationWindow {
     ImageIcon vaderBase;
     ImageIcon rover;
     JPanel mapPanel;
+    JLabel[][] canvas;
+    int stepCount;
 
-    SimulationWindow() {
+    SimulationWindow(String scene) {
 
         map = BackendConsole.getSurface();
         row = map.length;
         col = map[0].length;
 
-        frame = new JFrame("Tetra Star Simulation");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = new JFrame("Simulation Scenario " + scene);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
@@ -81,31 +83,44 @@ public class SimulationWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BackendConsole.nextFrame();
-//                draw();
+                draw(mapPanel);
                 String res = BackendConsole.getConsole();
-                output.append(res + "\n==============next Step==============\n\n");
+                stepCount += 1;
+                output.append("========================= Step "+stepCount+" =========================\n" + res + "--------------------------------------------------------\n\n");
             }
         });
         mapPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 
-        JLabel[][] canvas = new JLabel[row][col];
+        canvas = new JLabel[row][col];
+        draw(mapPanel);
+
+        frame.setSize(800, 800);
+        frame.setVisible(true);
+    }
+
+    private void draw(JPanel mapPanel) {
+
+        mapPanel.removeAll();
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 canvas[i][j] = new JLabel();
-                if (map[i][j] instanceof TetHero) {
-                    canvas[i][j] = new JLabel(hero);
-                }
-                else if (map[i][j] instanceof HeroBase) {
+
+
+                if (map[i][j] instanceof HeroBase) {
                     canvas[i][j] = new JLabel(heroBase);
                 }
-                else if (map[i][j] instanceof TetVader) {
-                    canvas[i][j] = new JLabel(vader);
+                else if (map[i][j] instanceof TetHero) {
+                    canvas[i][j] = new JLabel(hero);
                 }
                 else if (map[i][j] instanceof VaderBase) {
                     canvas[i][j] = new JLabel(vaderBase);
                 }
-                else if (map[i][j] instanceof Map) {
-                    canvas[i][j] = new JLabel(starMap);
+                else if (map[i][j] instanceof TetVader) {
+                    canvas[i][j] = new JLabel(vader);
+                }
+                else if (map[i][j] instanceof MapBase) {
+                    canvas[i][j] = new JLabel(mapBase);
                 }
                 else if (map[i][j] instanceof Map) {
                     canvas[i][j] = new JLabel(starMap);
@@ -120,44 +135,11 @@ public class SimulationWindow {
                 mapPanel.add(canvas[i][j]);
             }
         }
-        frame.setSize(800, 800);
-        frame.setVisible(true);
+        mapPanel.validate();
+        mapPanel.repaint();
     }
 
-//    private void draw() {
-//        for (int i = 0; i < row; i++) {
-//            for (int j = 0; j < col; j++) {
-//                this.canvas[i][j] = new JLabel();
-//                if (map[i][j] instanceof HeroBase) {
-//                    canvas[i][j] = new JLabel(heroBase);
-//                }
-//                else if (map[i][j] instanceof TetHero) {
-//                    canvas[i][j] = new JLabel(hero);
-//                }
-//                else if (map[i][j] instanceof VaderBase) {
-//                    canvas[i][j] = new JLabel(vaderBase);
-//                }
-//                else if (map[i][j] instanceof TetVader) {
-//                    canvas[i][j] = new JLabel(vader);
-//                }
-//                else if (map[i][j] instanceof MapBase) {
-//                    canvas[i][j] = new JLabel(mapBase);
-//                }
-//                else if (map[i][j] instanceof Map) {
-//                    canvas[i][j] = new JLabel(starMap);
-//                }
-//                else if (map[i][j] instanceof TetRover) {
-//                    canvas[i][j] = new JLabel(rover);
-//                }
-//                else if (map[i][j] instanceof River) {
-//                    canvas[i][j] = new JLabel(river);
-//                }
-//                canvas[i][j].setBorder(BorderFactory.createLineBorder(Color.white));
-//                mapPanel.add(canvas[i][j]);
-//            }
-//        }
-//    }
-
 }
+
 
 

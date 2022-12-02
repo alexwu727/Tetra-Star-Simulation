@@ -1,21 +1,15 @@
 package main.java.GUI;
 
-
 import main.java.BackendConsole;
-import main.java.Main;
-import main.java.TFace;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import javax.swing.*;
 
 public class MainFrame{
-//    MainFrame(TFace surface){
-    // HashMap<String, Object>
+
     public MainFrame() {
-        JFrame frame = new JFrame ("Compass");
+        JFrame frame = new JFrame ("Tetra Star");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new GridLayout(4, 1));
         JButton scenario1 = new JButton ("scenario 1");
@@ -36,36 +30,31 @@ public class MainFrame{
             public void actionPerformed(ActionEvent e) {
 
                 BackendConsole.simulateScenario(0);
-                new SimulationWindow();
+                new SimulationWindow("1");
             }
         });
         scenario2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BackendConsole.simulateScenario(1);
-                new SimulationWindow();
+                new SimulationWindow("2");
             }
         });
         scenario3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BackendConsole.simulateScenario(2);
-                new SimulationWindow();
+                new SimulationWindow("3");
             }
         });
         scenario4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BackendConsole.simulateScenario(3);
-                new SimulationWindow();
+                new SimulationWindow("4");
             }
         });
         frame.setSize(400,600);
-
-    }
-    public static void main(String[] args) {
-
-        new MainFrame();
 
     }
 }
