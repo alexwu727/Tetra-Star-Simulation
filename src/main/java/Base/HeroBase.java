@@ -1,6 +1,5 @@
 package main.java.Base;
 
-import main.java.TFace;
 import main.java.Map.Map;
 
 import java.util.ArrayList;
