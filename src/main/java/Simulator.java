@@ -17,6 +17,7 @@ public class Simulator {
         TFace tFace = TFace.instance();
         tFace.setSurfaceSize(scenario.sufaceRowSize, scenario.sufaceColSize);
         scenario.createInstances();
+        TFace.instance().updateDisplayHashMap();
     }
 
     public static void nextFrame() {
