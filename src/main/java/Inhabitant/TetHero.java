@@ -152,6 +152,9 @@ public class TetHero extends TetRover {
             if (character != ' ') {
                 int originalAlphabetPosition = character - 'a';
                 int newAlphabetPosition = (originalAlphabetPosition + offset) % 26;
+                if (newAlphabetPosition < 0) {
+                    newAlphabetPosition += 26;
+                }
                 char newCharacter = (char) ('a' + newAlphabetPosition);
                 result.append(newCharacter);
             } else {
