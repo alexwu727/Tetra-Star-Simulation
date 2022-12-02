@@ -61,7 +61,7 @@ public class Scenario {
         }
         for (int i = 0; i < starMapArgsList.size(); i++) {
             Object[] starMapArgs = starMapArgsList.get(i);
-            new StarMap((int) starMapArgs[0], (int) starMapArgs[1], (int) starMapArgs[2], (String) starMapArgs[3]);
+            new StarMap((int) starMapArgs[0], (int) starMapArgs[1], (int) starMapArgs[2], (String) starMapArgs[3], false);
         }
         for (int i = 0; i < starAtlasArgsList.size(); i++) {
             Object[] starAtlasArgs = starAtlasArgsList.get(i);

@@ -21,7 +21,7 @@ public class StarAtlas extends Map {
         tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
         starMaps = new ArrayList<StarMap>();
         for (int i = 0; i < mIDs.length; i++) {
-            StarMap starMap = new StarMap(row, col, mIDs[i], texts[i]);
+            StarMap starMap = new StarMap(row, col, mIDs[i], texts[i], true);
             this.addStarMaps(starMap);
             // tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
         }

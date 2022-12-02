@@ -9,10 +9,14 @@ public class StarMap extends Map {
         super(row, col, mID);
     }
 
-    public StarMap(int row, int col, int mID, String text) {
+    public StarMap(int row, int col, int mID, String text, boolean isLeaf) {
         super(row, col, mID);
         this.setText(text);
-        this.setDisplayID("StarMap");
+        if (isLeaf){
+            this.setDisplayID("StarAtlas");
+        } else {
+            this.setDisplayID("StarMap");
+        }
         tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
     }
 
