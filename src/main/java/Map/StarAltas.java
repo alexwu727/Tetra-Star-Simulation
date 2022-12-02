@@ -17,11 +17,14 @@ public class StarAltas extends Map {
 
     public StarAltas(int row, int col, int mID, int[] mIDs, String[] texts) {
         super(row, col, mID);
+        this.setDisplayID("StarAltas");
+        tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
         starMaps = new ArrayList<StarMap>();
         for (int i = 0; i < mIDs.length; i++) {
             StarMap starMap = new StarMap(row, col, mIDs[i], texts[i]);
             this.addStarMaps(starMap);
-            this.setDisplayID("StarAltas");
+            this.setDisplayID("StarMap");
+            // tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
         }
     }
 

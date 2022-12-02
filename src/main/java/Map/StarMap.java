@@ -13,6 +13,7 @@ public class StarMap extends Map {
         super(row, col, mID);
         this.setText(text);
         this.setDisplayID("StarMap");
+        tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
     }
 
     public StarMap(StarMap starMap) {

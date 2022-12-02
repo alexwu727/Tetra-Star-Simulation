@@ -138,10 +138,14 @@ public abstract class Map implements Locatable {
     }
 
     public void updateMapLocation(int row, int col) {
+        System.out.println(tFace.mapMap.get(tFace.convertToKey(getRow(), getCol())));
         tFace.mapMap.remove(tFace.convertToKey(getRow(), getCol()));
+        System.out.println(tFace.mapMap.get(tFace.convertToKey(getRow(), getCol())));
         setRow(row);
         setCol(col);
+        System.out.println("updateMapLocation(row, col);");
         tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
+        System.out.println(tFace.mapMap.get(tFace.convertToKey(getRow(), getCol())));
     }
 
 }
