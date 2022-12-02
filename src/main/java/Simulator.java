@@ -52,6 +52,8 @@ public class Simulator {
         scenario.addTetHeroArgs(0, 0, 1, 0);
         scenario.addTetHeroArgs(5, 9, 2, 0);
         scenario.addTetVaderArgs(4, 4, 3, 0);
+        scenario.addTetRoverArgs(2, 3, 4, 0);
+        scenario.addTetRoverArgs(9, 8, 5, 0);
         scenario.addStarMapArgs(7, 2, 0, "hello world");
         scenario.addStarAltasArgs(2, 7, 0, new int[] { 1, 2, 3, 4 }, new String[] { "hel", "lo", "wor", "ld" });
         scenarioHashMap.put(0, scenario);
