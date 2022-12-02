@@ -1,12 +1,12 @@
 package main.java.Inhabitant;
 
 import java.util.Stack;
-import main.java.Map.*;
 import main.java.Locatable;
 import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
 import main.java.Base.River;
 import main.java.Base.VaderBase;
+import main.java.Map.Map;
 
 public class TetVader extends TetRover {
     VaderBase vaderBase;
@@ -18,6 +18,7 @@ public class TetVader extends TetRover {
         vaderBase = new VaderBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(vaderBase);
         moveStack.push(new int[] { row, col });
+        this.setDisplayID("TetVader");
     }
 
     @Override
@@ -51,11 +52,10 @@ public class TetVader extends TetRover {
     }
 
     public void steal(MapBase mapBase) {
-        StarMap starMap = (StarMap) mapBase.getMap();
-        starMap.setRow(tFace.TetVaderBaseRow);
-        starMap.setCol(tFace.TetVaderBaseCol);
+        Map map = (Map) mapBase.getMap();
+        map.updateMapLocation(tFace.TetVaderBaseRow, tFace.TetVaderBaseCol);
         mapBase.setMap(null);
-        vaderBase.stealMap(starMap);
+        vaderBase.stealMap(map);
         this.nextAction = 2;
     }
 

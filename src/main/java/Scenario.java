@@ -43,21 +43,18 @@ public class Scenario {
         for (int i = 0; i < tetRoverArgsList.size(); i++) {
             int[] tetRoverArgs = tetRoverArgsList.get(i);
             TetRover tetRover = new TetRover(tetRoverArgs[0], tetRoverArgs[1], tetRoverArgs[2]);
-            tetRover.setDisplayID("R");
             tetRover.setWalkDirections(tetRoverArgs[3]);
             inhibitantList.add(tetRover);
         }
         for (int i = 0; i < tetHeroArgsList.size(); i++) {
             int[] tetHeroArgs = tetHeroArgsList.get(i);
             TetHero tetHero = new TetHero(tetHeroArgs[0], tetHeroArgs[1], tetHeroArgs[2]);
-            tetHero.setDisplayID("H");
             tetHero.setWalkDirections(tetHeroArgs[3]);
             inhibitantList.add(tetHero);
         }
         for (int i = 0; i < tetVaderArgsList.size(); i++) {
             int[] tetVaderArgs = tetVaderArgsList.get(i);
             TetVader tetVader = new TetVader(tetVaderArgs[0], tetVaderArgs[1], tetVaderArgs[2]);
-            tetVader.setDisplayID("V");
             tetVader.setWalkDirections(tetVaderArgs[3]);
             inhibitantList.add(tetVader);
         }

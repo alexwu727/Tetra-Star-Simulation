@@ -1,5 +1,8 @@
 package main.java;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class BackendConsole {
     private static String console;
 
@@ -12,8 +15,16 @@ public class BackendConsole {
         Simulator.start(index);
     }
 
-    public static Locatable[][] getSurface() {
-        return TFace.instance().Surface;
+    public static int getRowSize() {
+        return TFace.instance().getRowSize();
+    }
+
+    public static int getColSize() {
+        return TFace.instance().getColSize();
+    }
+
+    public static HashMap<String, List<String>> getDisplayHashMap() {
+        return TFace.instance().displayHashMap;
     }
 
     public static void addConsole(String text) {

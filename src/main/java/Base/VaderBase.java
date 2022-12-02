@@ -11,7 +11,7 @@ public class VaderBase extends Base {
     public VaderBase(int row, int col, String VaderBID) {
         super(row, col, VaderBID);
         stolenMaps = new HashMap<Integer, Map>();
-        this.setDisplayID("VB");
+        this.setDisplayID("VaderBase");
     }
 
     public HashMap<Integer, Map> getStolenMaps() {

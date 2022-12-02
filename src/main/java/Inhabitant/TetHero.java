@@ -24,6 +24,7 @@ public class TetHero extends TetRover {
         // only on the edge
         heroBase = new HeroBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(heroBase);
+        this.setDisplayID("TetHero");
     }
 
     @Override
@@ -193,14 +194,15 @@ public class TetHero extends TetRover {
 
     public void restore(Map map) {
         MapBase mapBase = map.getMapBase();
-        map.setRow(mapBase.getRow());
-        map.setCol(mapBase.getCol());
+        map.updateMapLocation(mapBase.getRow(), mapBase.getCol());
         mapBase.setMap(map);
     }
 
     public void cloneMap(Map map) {
-        Map clone = map.clone();
-        heroBase.cloneMap(clone);
+        Map clonedMap = map.clone();
+        clonedMap.setDisplayID("CloneMap");
+        tFace.mapMap.put(tFace.convertToKey(clonedMap.getRow(), clonedMap.getCol()), clonedMap.getDisplayID());
+        heroBase.cloneMap(clonedMap);
 
     }
 

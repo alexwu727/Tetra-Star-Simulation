@@ -21,6 +21,7 @@ public class StarAltas extends Map {
         for (int i = 0; i < mIDs.length; i++) {
             StarMap starMap = new StarMap(row, col, mIDs[i], texts[i]);
             this.addStarMaps(starMap);
+            this.setDisplayID("StarAltas");
         }
     }
 

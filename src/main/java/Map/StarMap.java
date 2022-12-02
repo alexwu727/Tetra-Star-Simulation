@@ -12,6 +12,7 @@ public class StarMap extends Map {
     public StarMap(int row, int col, int mID, String text) {
         super(row, col, mID);
         this.setText(text);
+        this.setDisplayID("StarMap");
     }
 
     public StarMap(StarMap starMap) {

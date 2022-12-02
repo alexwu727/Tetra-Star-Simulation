@@ -1,5 +1,6 @@
 package main.java.Map;
 
+import main.java.Locatable;
 import main.java.TFace;
 import main.java.Base.MapBase;
 import main.java.Inhabitant.TetHero;
@@ -8,10 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class Map {
+public abstract class Map implements Locatable {
     protected int mID;
     protected int row;
     protected int col;
+    protected String displayID;
     protected TFace tFace = TFace.instance();
     protected MapBase mapBase;
     protected int itemCount;
@@ -37,11 +39,14 @@ public abstract class Map {
         mapBase.setMap(this);
         mapBase.setMapID(mID);
         tFace.addBase(mapBase);
+        this.setDisplayID("Map");
+        tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
     }
 
     public Map(Map map) {
         if (map != null) {
             this.mapBase = map.mapBase;
+            this.mID = map.mID;
             this.text = map.text;
             this.isEncrypted = map.isEncrypted;
             this.encryptSymbol = map.encryptSymbol;
@@ -121,6 +126,21 @@ public abstract class Map {
 
     public void addHero(TetHero tetHero) {
         heroList.add(tetHero.getTID());
+    }
+
+    public void setDisplayID(String displayID) {
+        this.displayID = displayID;
+    }
+
+    public String getDisplayID() {
+        return displayID;
+    }
+
+    public void updateMapLocation(int row, int col) {
+        tFace.mapMap.remove(tFace.convertToKey(getRow(), getCol()));
+        setRow(row);
+        setCol(col);
+        tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
     }
 
 }

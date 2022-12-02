@@ -10,7 +10,7 @@ public class MapBase extends Base {
 
     public MapBase(int row, int col, String MapBID) {
         super(row, col, MapBID);
-        this.setDisplayID("MB");
+        this.setDisplayID("MapBase");
     }
 
     public boolean hasMap() {

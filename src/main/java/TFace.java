@@ -1,17 +1,22 @@
 package main.java;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 
 import main.java.Base.*;
+import main.java.Inhabitant.TetRover;
 
 public class TFace {
     private static TFace singleton = null;
     private int rowSize;
     private int colSize;
     public Locatable Surface[][];
+    public HashMap<String, List<String>> displayHashMap = new HashMap<String, List<String>>();
     public Map<String, Base> baseMap = new HashMap<String, Base>();
+    public Map<String, String> mapMap = new HashMap<String, String>();
     public int TetVaderBaseRow;
     public int TetVaderBaseCol;
 
@@ -55,7 +60,6 @@ public class TFace {
         int row = base.getRow();
         int col = base.getCol();
         baseMap.put(base.getBID(), base);
-        Surface[row][col] = base;
         if (base instanceof VaderBase) {
             addRiver(row, col);
             this.TetVaderBaseRow = row;
@@ -79,6 +83,7 @@ public class TFace {
                 continue;
             }
             River river = new River(row, col, convertToKey(row, col));
+            addBase(river);
             Surface[row][col] = river;
         }
 
@@ -96,14 +101,52 @@ public class TFace {
         Surface = new Locatable[row][col];
     }
 
-    public void printSurface() {
-        for (int i = 0; i < rowSize; i++) {
-            for (int j = 0; j < colSize; j++) {
-                String displayID = Surface[i][j] == null ? "0" : Surface[i][j].getDisplayID();
-                System.out.print(displayID + " ");
+    public void updateDisplayHashMap() {
+        displayHashMap = new HashMap<String, List<String>>();
+        // bases
+        for (Map.Entry<String, Base> entry : baseMap.entrySet()) {
+            List<String> displayList = new ArrayList<>();
+            displayList.add(entry.getValue().getDisplayID());
+            displayHashMap.put(entry.getKey(), displayList);
+        }
+
+        // rovers
+        for (int i = 0; i < Surface.length; i++) {
+            for (int j = 0; j < Surface[0].length; j++) {
+                if (Surface[i][j] instanceof TetRover) {
+                    String key = convertToKey(i, j);
+                    if (displayHashMap.containsKey(convertToKey(i, j))) {
+                        displayHashMap.get(key).add(Surface[i][j].getDisplayID());
+                    } else {
+                        List<String> displayList = new ArrayList<>();
+                        displayList.add(Surface[i][j].getDisplayID());
+                        displayHashMap.put(key, displayList);
+                    }
+                }
             }
-            System.out.println();
+        }
+
+        // maps
+        for (Map.Entry<String, String> entry : mapMap.entrySet()) {
+            if (displayHashMap.containsKey(entry.getKey())) {
+                displayHashMap.get(entry.getKey()).add(entry.getValue());
+            } else {
+                List<String> displayList = new ArrayList<>();
+                displayList.add(entry.getValue());
+                displayHashMap.put(entry.getKey(), displayList);
+            }
         }
     }
+
+    // public void printSurface() {
+    // for (int i = 0; i < rowSize; i++) {
+    // for (int j = 0; j < colSize; j++) {
+    // String displayID = Surface[i][j] == null ? "0" :
+    // Surface[i][j].getDisplayID();
+    // System.out.print(displayID + " ");
+    // }
+    // System.out.println();
+    // }
+    // }
 
 }

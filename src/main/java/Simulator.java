@@ -28,6 +28,7 @@ public class Simulator {
             scenario.inhibitantList.get(0).setWalkDirections(1);
             scenario.inhibitantList.get(1).setWalkDirections(3);
         }
+        TFace.instance().updateDisplayHashMap();
 
     }
 
