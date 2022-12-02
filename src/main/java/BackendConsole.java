@@ -8,7 +8,7 @@ public class BackendConsole {
     }
 
     public static void simulateScenario(int index) {
-
+        console = "";
         Simulator.start(index);
     }
 
