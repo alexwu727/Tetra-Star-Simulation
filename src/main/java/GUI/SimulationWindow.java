@@ -14,6 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -21,26 +23,29 @@ public class SimulationWindow {
     JFrame frame;
     int row;
     int col;
-    Locatable[][] map;
+    HashMap<String, List<String>> displayHashMap;
 
     ImageIcon river;
     ImageIcon hero;
     ImageIcon heroBase;
     ImageIcon mapBase;
     ImageIcon starMap;
+    ImageIcon starAltas;
     ImageIcon cloneMap;
     ImageIcon vader;
     ImageIcon vaderBase;
-    ImageIcon rover;
+    ImageIcon roverMan;
+    ImageIcon roverWoman;
     JPanel mapPanel;
     JLabel[][] canvas;
     int stepCount;
 
     SimulationWindow(String scene) {
 
-        map = BackendConsole.getSurface();
-        row = map.length;
-        col = map[0].length;
+        displayHashMap = BackendConsole.getDisplayHashMap();
+        System.out.println(displayHashMap);
+        row = BackendConsole.getRowSize();
+        col = BackendConsole.getColSize();
 
         frame = new JFrame("Simulation Scenario " + scene);
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,16 +80,19 @@ public class SimulationWindow {
         heroBase = new ImageIcon(((new ImageIcon("res/hero_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         mapBase = new ImageIcon(((new ImageIcon("res/map_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         starMap = new ImageIcon(((new ImageIcon("res/star_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
+        starAltas = new ImageIcon(((new ImageIcon("res/star_altas.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         cloneMap = new ImageIcon(((new ImageIcon("res/clone_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vader = new ImageIcon(((new ImageIcon("res/vader.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vaderBase = new ImageIcon(((new ImageIcon("res/vader_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        rover = new ImageIcon(((new ImageIcon("res/man1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
+        roverMan = new ImageIcon(((new ImageIcon("res/man1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
+        roverWoman = new ImageIcon(((new ImageIcon("res/woman1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
 
 
         nextAction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BackendConsole.nextFrame();
+                displayHashMap = BackendConsole.getDisplayHashMap();
                 draw(mapPanel);
                 String res = BackendConsole.getConsole();
                 stepCount += 1;
@@ -108,43 +116,56 @@ public class SimulationWindow {
             for (int j = 0; j < col; j++) {
                 canvas[i][j] = new JLabel();
 
-
-                if (map[i][j] instanceof HeroBase) {
+                String searchKey = i + "," + j;
+                if (displayHashMap.containsKey(searchKey)) {
+                    List<String> residents= displayHashMap.get(searchKey);
                     JLabel crowded = new JLabel();
                     crowded.setLayout(new BoxLayout(crowded, BoxLayout.X_AXIS));
-                    JLabel roommate1 = new JLabel();
-                    JLabel roommate2 = new JLabel();
-                    JLabel roommate3 = new JLabel();
-                    roommate1.setIcon(heroBase);
-                    roommate2.setIcon(vader);
-                    roommate3.setIcon(starMap);
+                    for (String inhabitant : residents) {
+                        switch (inhabitant) {
+                            case "TetHero":
+                                crowded.add(new JLabel(hero));
+                                break;
+                            case "HeroBase":
+                                crowded.add(new JLabel(heroBase));
+                                break;
+                            case "TetVader":
+                                crowded.add(new JLabel(vader));
+                                break;
+                            case "VaderBase":
+                                crowded.add(new JLabel(vaderBase));
+                                break;
+//                            case "StarMap":
+//                                crowded.add(new JLabel(starMap));
+//                                break;
+//                            case "StarAltas":
+//                                crowded.add(new JLabel(starAltas));
+//                                break;
+                            case "Map":
+                                crowded.add(new JLabel(starMap));
+                                break;
+                            case "MapBase":
+                                crowded.add(new JLabel(mapBase));
+                                break;
+                            case "CloneMap":
+                                crowded.add(new JLabel(cloneMap));
+                                break;
+                            case "River":
+                                crowded.add(new JLabel(river));
+                                break;
+                            case "TetRover4":
+                                crowded.add(new JLabel(roverMan));
+                                break;
+                            case "TetRover5":
+                                crowded.add(new JLabel(roverWoman));
+                                break;
 
-                    crowded.add(roommate1);
-                    crowded.add(roommate3);
-                    crowded.add(roommate2);
+                        }
+                    }
                     canvas[i][j] = crowded;
-//                    canvas[i][j] = new JLabel(heroBase);
                 }
-                else if (map[i][j] instanceof TetHero) {
-                    canvas[i][j] = new JLabel(hero);
-                }
-                else if (map[i][j] instanceof VaderBase) {
-                    canvas[i][j] = new JLabel(vaderBase);
-                }
-                else if (map[i][j] instanceof TetVader) {
-                    canvas[i][j] = new JLabel(vader);
-                }
-                else if (map[i][j] instanceof MapBase) {
-                    canvas[i][j] = new JLabel(mapBase);
-                }
-                else if (map[i][j] instanceof Map) {
-                    canvas[i][j] = new JLabel(starMap);
-                }
-                else if (map[i][j] instanceof TetRover) {
-                    canvas[i][j] = new JLabel(rover);
-                }
-                else if (map[i][j] instanceof River) {
-                    canvas[i][j] = new JLabel(river);
+                else {
+                    canvas[i][j] = new JLabel("");
                 }
                 canvas[i][j].setBorder(BorderFactory.createLineBorder(Color.white));
                 mapPanel.add(canvas[i][j]);
