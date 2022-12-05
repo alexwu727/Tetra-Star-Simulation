@@ -10,9 +10,11 @@ public class BackendConsole {
         Simulator.createScenarios();
     }
 
-    public static void simulateScenario(int index) {
+    public static void simulateScenario(int index, int[] args) {
         console = "";
-        Simulator.start(index);
+        if (index == 5) { Simulator.startWithArgs(args);}
+        else {Simulator.start(index);}
+
     }
 
     public static int getRowSize() {

@@ -19,6 +19,14 @@ public class Scenario {
     private List<Object[]> starMapArgsList = new ArrayList<Object[]>();
     private List<Object[]> starAtlasArgsList = new ArrayList<Object[]>();
 
+    public void resetOldInhibitants() {
+        tetRoverArgsList.clear();
+        tetHeroArgsList.clear();
+        tetVaderArgsList.clear();
+        starMapArgsList.clear();
+        starAtlasArgsList.clear();
+        inhibitantList.clear();
+    }
     public void addTetRoverArgs(int row, int col, int tID, int walkDirectionIndex) {
         tetRoverArgsList.add(new int[] { row, col, tID, walkDirectionIndex });
     }
@@ -40,7 +48,6 @@ public class Scenario {
     }
 
     public void createInstances() {
-        inhibitantList.clear();
         for (int i = 0; i < tetRoverArgsList.size(); i++) {
             int[] tetRoverArgs = tetRoverArgsList.get(i);
             TetRover tetRover = new TetRover(tetRoverArgs[0], tetRoverArgs[1], tetRoverArgs[2]);
