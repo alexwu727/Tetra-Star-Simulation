@@ -1,0 +1,252 @@
+@startuml
+class main.java.Map.StarAtlas {
+~ List<StarMap> starMaps
++ StarAtlas clone()
++ List<StarMap> getStarMaps()
++ void addStarMaps(StarMap)
+}
+class main.java.BackendConsole {
+- {static} String console
++ {static} void buildSimulator()
++ {static} void simulateScenario(int)
++ {static} int getRowSize()
++ {static} int getColSize()
++ {static} HashMap<String,List<String>> getDisplayHashMap()
++ {static} void addConsole(String)
++ {static} String getConsole()
++ {static} void nextFrame()
+}
+class main.java.GUI.SimulationWindow {
+~ JFrame frame
+~ int row
+~ int col
+~ HashMap<String,List<String>> displayHashMap
+~ ImageIcon river
+~ ImageIcon hero
+~ ImageIcon heroBase
+~ ImageIcon mapBase
+~ ImageIcon starMap
+~ ImageIcon starAtlas
+~ ImageIcon cloneMap
+~ ImageIcon vader
+~ ImageIcon vaderBase
+~ ImageIcon roverMan
+~ ImageIcon roverWoman
+~ JPanel mapPanel
+~ JLabel[][] canvas
+~ int stepCount
+- void draw(JPanel)
+}
+class main.java.Inhabitant.TetHero {
+~ boolean tFlier
+~ int cipherKey
+~ int findMapID
+~ HeroBase heroBase
++ boolean positionCheck(int,int)
++ int nextActionEnterMapBase(MapBase)
++ void action()
++ void actionToMapInMapBase(Map)
++ void display(Map)
++ void requestTFlier()
+- void flyTo(int,int)
++ void check(int)
++ void actionToMapInVaderBase()
+- String caesarCipher(String,int)
++ void encrypt(Map)
++ void decrypt(Map)
++ void restore(Map)
++ void cloneMap(Map)
++ void incrementRestorationCounter(Map)
++ void setHeroBase(HeroBase)
+- void printSymbol(String)
+}
+class main.java.Inhabitant.TetRover {
+# int tID
+# String displayID
+# int row
+# int col
+# int nextAction
+# TFace tFace
+# boolean tFlier
+~ int[][] directions
+~ int[][] extraDirections
++ void setDisplayID(String)
++ String getDisplayID()
++ int getTID()
++ int getRow()
++ int getCol()
++ void setRow(int)
++ void setCol(int)
++ boolean positionCheck(int,int)
++ int nextActionEnterMapBase(MapBase)
++ void action()
++ List<int[]> possiblePositions(int[][])
++ void setWalkDirections(int)
++ void walk()
++ void actionToConsole(String)
+}
+class main.java.Main {
++ {static} void main(String[])
++ {static} void wait(int)
++ {static} void bar(String)
+}
+class main.java.Map.StarMap {
++ StarMap clone()
+}
+class main.java.Simulator {
+~ {static} Scenario scenario
+~ {static} int currentScenarioIndex
+~ {static} int helper
+- {static} HashMap<Integer,Scenario> scenarioHashMap
++ {static} void start(int)
++ {static} void nextFrame()
++ {static} void wait(int)
++ {static} void bar(String)
++ {static} void createScenarios()
+}
+class main.java.Scenario {
++ int sufaceColSize
++ int sufaceRowSize
++ List<TetRover> inhibitantList
+- List<int[]> tetRoverArgsList
+- List<int[]> tetHeroArgsList
+- List<int[]> tetVaderArgsList
+- List<Object[]> starMapArgsList
+- List<Object[]> starAtlasArgsList
++ void addTetRoverArgs(int,int,int,int)
++ void addTetHeroArgs(int,int,int,int)
++ void addTetVaderArgs(int,int,int,int)
++ void addStarMapArgs(int,int,int,String)
++ void addStarAtlasArgs(int,int,int,int[],String[])
++ void createInstances()
+}
+interface main.java.Locatable {
++ void setRow(int)
++ void setCol(int)
++ void setDisplayID(String)
++ int getRow()
++ int getCol()
++ String getDisplayID()
+}
+class main.java.Base.River {
+}
+class main.java.Base.MapBase {
+- boolean hasMap
+~ Map map
+~ int mapID
++ boolean hasMap()
++ void setMap(Map)
++ void setMapID(int)
++ int getMapID()
++ Map getMap()
+}
+class main.java.GUI.MainFrame {
+}
+class main.java.Base.VaderBase {
+- HashMap<Integer,Map> stolenMaps
++ HashMap<Integer,Map> getStolenMaps()
++ void stealMap(Map)
++ Map removeMap(int)
+}
+abstract class main.java.Map.Map {
+# int mID
+# int row
+# int col
+# String displayID
+# TFace tFace
+# MapBase mapBase
+# int itemCount
+# String text
+# boolean isEncrypted
+# String encryptSymbol
+# int encryptHeroID
+# int restorationCounter
+# List<Integer> heroList
+# HashMap<String,String> header
+# String body
++ {abstract}Map clone()
++ void setRow(int)
++ int getRow()
++ void setCol(int)
++ int getCol()
++ int getMID()
++ MapBase getMapBase()
++ String getText()
++ void setText(String)
++ boolean isEncrypted()
++ void encrpyt()
++ void decrpyt()
++ int getEncryptHeroID()
++ void setEncryptHeroID(int)
++ String getEncryptSymbol()
++ int getRestorationCounter()
++ void setRestorationCounter(int)
++ void addHero(TetHero)
++ void setDisplayID(String)
++ String getDisplayID()
++ void updateMapLocation(int,int)
+}
+abstract class main.java.Base.Base {
+# String displayID
+# int row
+# int col
+# String bID
++ void setRow(int)
++ void setCol(int)
++ int getRow()
++ int getCol()
++ String getBID()
++ void setDisplayID(String)
++ String getDisplayID()
+}
+class main.java.Inhabitant.TetVader {
+~ VaderBase vaderBase
+~ Stack<int[]> moveStack
++ boolean positionCheck(int,int)
++ int nextActionEnterMapBase(MapBase)
++ void action()
++ void steal(MapBase)
++ void backtrack()
+- void flyTo(int,int)
+}
+class main.java.TFace {
+- {static} TFace singleton
+- int rowSize
+- int colSize
++ Locatable[][] Surface
++ HashMap<String,List<String>> displayHashMap
++ Map<String,Base> baseMap
++ Map<String,String> mapMap
++ int TetVaderBaseRow
++ int TetVaderBaseCol
++ {static} TFace instance()
++ {static} void clear()
++ int getRowSize()
++ int getColSize()
++ void addObject(Locatable)
++ void removeObject(Locatable)
++ void addBase(Base)
++ Base getBase(int,int)
++ void addRiver(int,int)
++ String convertToKey(int,int)
++ void setSurfaceSize(int,int)
++ void updateDisplayHashMap()
+}
+class main.java.Base.HeroBase {
+- ArrayList<Map> cloneMaps
++ void cloneMap(Map)
+}
+
+
+main.java.Map.Map <|-- main.java.Map.StarAtlas
+main.java.Inhabitant.TetRover <|-- main.java.Inhabitant.TetHero
+main.java.Locatable <|.. main.java.Inhabitant.TetRover
+main.java.Map.Map <|-- main.java.Map.StarMap
+main.java.Base.Base <|-- main.java.Base.River
+main.java.Base.Base <|-- main.java.Base.MapBase
+main.java.Base.Base <|-- main.java.Base.VaderBase
+main.java.Locatable <|.. main.java.Map.Map
+main.java.Locatable <|.. main.java.Base.Base
+main.java.Inhabitant.TetRover <|-- main.java.Inhabitant.TetVader
+main.java.Base.Base <|-- main.java.Base.HeroBase
+@enduml

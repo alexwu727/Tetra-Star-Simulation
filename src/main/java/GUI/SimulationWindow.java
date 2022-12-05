@@ -108,7 +108,7 @@ public class SimulationWindow {
 
                 String searchKey = i + "," + j;
                 if (displayHashMap.containsKey(searchKey)) {
-                    List<String> residents= displayHashMap.get(searchKey);
+                    List<String> residents = displayHashMap.get(searchKey);
                     JLabel crowded = new JLabel();
                     crowded.setLayout(new BoxLayout(crowded, BoxLayout.X_AXIS));
                     for (String inhabitant : residents) {

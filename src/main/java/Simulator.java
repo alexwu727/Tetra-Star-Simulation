@@ -2,7 +2,10 @@ package main.java;
 
 import main.java.Inhabitant.Inhabitant;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class Simulator {
     static Scenario scenario;
@@ -19,6 +22,63 @@ public class Simulator {
         tFace.setSurfaceSize(scenario.sufaceRowSize, scenario.sufaceColSize);
         scenario.createInstances();
         TFace.instance().updateDisplayHashMap();
+    }
+    public static void startWithArgs(int[] scenarioArgs) {
+        TFace.clear();
+        scenario = scenarioHashMap.get(4);
+        scenario.resetOldInhibitants();
+        scenario.sufaceRowSize = scenarioArgs[4];
+        scenario.sufaceColSize = scenarioArgs[5];
+        Random rand = new Random();
+
+        int[] heroLoc = rand.ints(1, 2*scenarioArgs[4]+2*scenarioArgs[5]-4).distinct().limit(scenarioArgs[0]).toArray();
+        List<String> occupied = new ArrayList<>();
+        for (int i = 0; i < scenarioArgs[0]; i++) {
+            int row, col;
+            if (0 < heroLoc[i] && heroLoc[i] <= scenarioArgs[4]) { row = 0; col = heroLoc[i]-1;}
+            else if (scenarioArgs[4] < heroLoc[i] && heroLoc[i] < scenarioArgs[4]+scenarioArgs[5]) { row = heroLoc[i]-scenarioArgs[4]; col = scenarioArgs[4]-1;}
+            else if (scenarioArgs[4]+scenarioArgs[5] <= heroLoc[i] && heroLoc[i] < 2*scenarioArgs[4]+scenarioArgs[5]-2) { row = scenarioArgs[5]-1; col = 2*scenarioArgs[4]+scenarioArgs[5]-2-heroLoc[i];}
+            else { row = 2*(scenarioArgs[4]+scenarioArgs[5])-3-heroLoc[i];col = 0;}
+            scenario.addTetHeroArgs(row, col, i, 0);
+            occupied.add(row+","+col);
+        }
+        int row = rand.nextInt(scenarioArgs[4]), col = rand.nextInt(scenarioArgs[5]);
+        while (occupied.contains(row+","+col)) {
+            row = rand.nextInt(scenarioArgs[4]);
+            col = rand.nextInt(scenarioArgs[5]);
+        }
+        scenario.addTetVaderArgs(row, col, 0, 0);
+        occupied.add(row+","+col);
+
+        for (int i = 0; i < scenarioArgs[1]; i++) {
+            while (occupied.contains(row+","+col)) {
+                row = rand.nextInt(scenarioArgs[4]);
+                col = rand.nextInt(scenarioArgs[5]);
+            }
+            scenario.addTetRoverArgs(row, col, 4, 0);
+            occupied.add(row+","+col);
+        }
+        for (int i = 0; i < scenarioArgs[2]; i++) {
+            while (occupied.contains(row+","+col)) {
+                row = rand.nextInt(scenarioArgs[4]);
+                col = rand.nextInt(scenarioArgs[5]);
+            }
+            scenario.addStarMapArgs(row, col, i, "hello world"+i);
+            occupied.add(row+","+col);
+        }
+        for (int i = 0; i < scenarioArgs[3]; i++) {
+            while (occupied.contains(row+","+col)) {
+                row = rand.nextInt(scenarioArgs[4]);
+                col = rand.nextInt(scenarioArgs[5]);
+            }
+            scenario.addStarAtlasArgs(row, col, i, new int[] { 1, 2, 3, 4 }, new String[] { "hel"+i, "lo"+i, "wor"+i, "ld"+i });
+            occupied.add(row+","+col);
+        }
+        TFace tFace = TFace.instance();
+        tFace.setSurfaceSize(scenario.sufaceRowSize, scenario.sufaceColSize);
+        scenario.createInstances();
+        TFace.instance().updateDisplayHashMap();
+
     }
 
     public static void nextFrame() {
@@ -90,6 +150,12 @@ public class Simulator {
         scenario.addTetVaderArgs(5, 4, 3, 1);
         scenario.addStarMapArgs(3, 4, 0, "hello world");
         scenarioHashMap.put(3, scenario);
+
+        // scenario customize
+        scenario = new Scenario();
+        scenario.sufaceRowSize = 0;
+        scenario.sufaceColSize = 0;
+        scenarioHashMap.put(4, scenario);
     }
 
 }
