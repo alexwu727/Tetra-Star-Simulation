@@ -3,6 +3,7 @@ package main.java;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.java.Inhabitant.Inhabitant;
 import main.java.Inhabitant.TetHero;
 import main.java.Inhabitant.TetRover;
 import main.java.Inhabitant.TetVader;
@@ -12,7 +13,7 @@ import main.java.Map.StarMap;
 public class Scenario {
     public int sufaceColSize;
     public int sufaceRowSize;
-    public List<TetRover> inhibitantList = new ArrayList<>();
+    public List<Inhabitant> inhibitantList = new ArrayList<>();
     private List<int[]> tetRoverArgsList = new ArrayList<int[]>();
     private List<int[]> tetHeroArgsList = new ArrayList<int[]>();
     private List<int[]> tetVaderArgsList = new ArrayList<int[]>();
@@ -61,7 +62,8 @@ public class Scenario {
         }
         for (int i = 0; i < starMapArgsList.size(); i++) {
             Object[] starMapArgs = starMapArgsList.get(i);
-            new StarMap((int) starMapArgs[0], (int) starMapArgs[1], (int) starMapArgs[2], (String) starMapArgs[3], false);
+            new StarMap((int) starMapArgs[0], (int) starMapArgs[1], (int) starMapArgs[2], (String) starMapArgs[3],
+                    false);
         }
         for (int i = 0; i < starAtlasArgsList.size(); i++) {
             Object[] starAtlasArgs = starAtlasArgsList.get(i);
