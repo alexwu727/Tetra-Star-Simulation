@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 interface Command {
-    public void openSimulator();
+    void openSimulator();
 }
 class DefaultCommand implements Command {
     private int scene;

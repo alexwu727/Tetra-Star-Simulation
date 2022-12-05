@@ -1,12 +1,12 @@
 package main.java;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import main.java.Inhabitant.Inhabitant;
 import main.java.Inhabitant.InhabitantFactory;
 import main.java.Map.StarAtlas;
 import main.java.Map.StarMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Scenario {
     public int sufaceColSize;

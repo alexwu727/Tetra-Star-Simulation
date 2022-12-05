@@ -26,8 +26,6 @@ public class SimulationWindow {
     ImageIcon cloneMap;
     ImageIcon vader;
     ImageIcon vaderBase;
-    ImageIcon roverMan;
-    ImageIcon roverWoman;
     JPanel mapPanel;
     JLabel[][] canvas;
     ArrayList<ImageIcon> roverList;
@@ -76,6 +74,7 @@ public class SimulationWindow {
         cloneMap = new ImageIcon(((new ImageIcon("res/clone_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vader = new ImageIcon(((new ImageIcon("res/vader.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vaderBase = new ImageIcon(((new ImageIcon("res/vader_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
+
         roverList = new ArrayList<>();
         roverList.add(new ImageIcon(((new ImageIcon("res/man1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
         roverList.add(new ImageIcon(((new ImageIcon("res/woman1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));

@@ -1,9 +1,6 @@
 package main.java.Map;
 
 public class StarMap extends MapClass {
-    // public StarMap() {
-
-    // }
 
     public StarMap(int row, int col, int mID, String text, boolean inAtlas) {
         super(row, col, mID, inAtlas);

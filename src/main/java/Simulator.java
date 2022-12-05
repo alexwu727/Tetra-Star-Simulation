@@ -4,7 +4,6 @@ import main.java.Inhabitant.Inhabitant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 public class Simulator {
@@ -12,6 +11,8 @@ public class Simulator {
     static int currentScenarioIndex;
     static int helper;
     private static HashMap<Integer, Scenario> scenarioHashMap = new HashMap<Integer, Scenario>();
+    static ArrayList<String> occupied = new ArrayList<>();
+    static Random rand = new Random();
 
     public static void start(int scenarioIndex) {
         helper = 15;
@@ -24,74 +25,64 @@ public class Simulator {
         TFace.instance().updateDisplayHashMap();
     }
 
+    private static int[] getAvailableLoc(int row, int col, boolean isVader) {
+        int currRow = rand.nextInt(row), currCol = rand.nextInt(col);
+        while (occupied.contains(currRow + "," + currCol)) {
+            currRow = rand.nextInt(row);
+            currCol = rand.nextInt(col);
+        }
+        occupied.add(currRow + "," + currCol);
+        if (isVader) {
+            if ( currRow-1 >= 0 ) { occupied.add(currRow-1 + "," + currCol);}
+            if ( currRow+1 < row ) { occupied.add(currRow+1 + "," + currCol);}
+            if ( currCol-1 >= 0 ) { occupied.add(currRow + "," + (currCol-1));}
+            if ( currCol-1 < col ) { occupied.add(currRow + "," + currCol+1);}
+        }
+        return new int[]{currRow, currCol};
+    }
     public static void startWithArgs(int[] scenarioArgs) {
         TFace.clear();
+        int row = scenarioArgs[4], col =  scenarioArgs[5];
         scenario = scenarioHashMap.get(4);
         scenario.resetOldInhibitants();
-        scenario.sufaceRowSize = scenarioArgs[4];
-        scenario.sufaceColSize = scenarioArgs[5];
-        Random rand = new Random();
+        scenario.sufaceRowSize = row;
+        scenario.sufaceColSize = col;
+        occupied.clear();
 
-        int[] heroLoc = rand.ints(1, 2 * scenarioArgs[4] + 2 * scenarioArgs[5] - 4).distinct().limit(scenarioArgs[0])
-                .toArray();
-        List<String> occupied = new ArrayList<>();
+        int[] heroLoc = rand.ints(0, (2 * row + 2 * col) - 5).distinct().limit(scenarioArgs[0]).toArray();
+
         for (int i = 0; i < scenarioArgs[0]; i++) {
-            int row, col;
-            if (0 < heroLoc[i] && heroLoc[i] <= scenarioArgs[4]) {
-                row = 0;
-                col = heroLoc[i] - 1;
-            } else if (scenarioArgs[4] < heroLoc[i] && heroLoc[i] < scenarioArgs[4] + scenarioArgs[5]) {
-                row = heroLoc[i] - scenarioArgs[4];
-                col = scenarioArgs[4] - 1;
-            } else if (scenarioArgs[4] + scenarioArgs[5] <= heroLoc[i]
-                    && heroLoc[i] < 2 * scenarioArgs[4] + scenarioArgs[5] - 2) {
-                row = scenarioArgs[5] - 1;
-                col = 2 * scenarioArgs[4] + scenarioArgs[5] - 2 - heroLoc[i];
+            int CurrRow, CurrCol;
+            if (0 <= heroLoc[i] && heroLoc[i] < col) {
+                CurrRow = 0; CurrCol = heroLoc[i];
+            } else if (col <= heroLoc[i] && heroLoc[i] < row + col - 2) {
+                CurrRow = heroLoc[i] - row; CurrCol = col - 1;
+            } else if (row + col - 1 <= heroLoc[i] && heroLoc[i] < row + 2*col - 2) {
+                CurrRow = row - 1; CurrCol = row + 2*col - 3 - heroLoc[i];
             } else {
-                row = 2 * (scenarioArgs[4] + scenarioArgs[5]) - 3 - heroLoc[i];
-                col = 0;
+                CurrRow = 2 * (row + col) - 4 - heroLoc[i]; CurrCol = 0;
             }
-            scenario.addInhabitantArgs("TetHero", row, col, i, 0);
+            scenario.addInhabitantArgs("TetHero", CurrRow, CurrCol, i, 0);
             occupied.add(row + "," + col);
         }
-        int row = rand.nextInt(scenarioArgs[4]), col = rand.nextInt(scenarioArgs[5]);
-        while (occupied.contains(row + "," + col)) {
-            row = rand.nextInt(scenarioArgs[4]);
-            col = rand.nextInt(scenarioArgs[5]);
-        }
-        scenario.addInhabitantArgs("TetVader", row, col, 0, 0);
-        occupied.add(row + "," + col);
+
+        scenario.addInhabitantArgs("TetVader", getAvailableLoc(row, col, true)[0], getAvailableLoc(row, col, true)[1], 0, 0);
 
         for (int i = 0; i < scenarioArgs[1]; i++) {
-            while (occupied.contains(row + "," + col)) {
-                row = rand.nextInt(scenarioArgs[4]);
-                col = rand.nextInt(scenarioArgs[5]);
-            }
-            scenario.addInhabitantArgs("TetRover", row, col, 4, 0);
-            occupied.add(row + "," + col);
+            scenario.addInhabitantArgs("TetRover", getAvailableLoc(row, col, false)[0], getAvailableLoc(row, col, false)[1], i, 0);
         }
         for (int i = 0; i < scenarioArgs[2]; i++) {
-            while (occupied.contains(row + "," + col)) {
-                row = rand.nextInt(scenarioArgs[4]);
-                col = rand.nextInt(scenarioArgs[5]);
-            }
-            scenario.addStarMapArgs(row, col, i, "hello world" + i);
-            occupied.add(row + "," + col);
+            scenario.addStarMapArgs(getAvailableLoc(row, col, false)[0], getAvailableLoc(row, col, false)[1], i, "hello world" + i);
         }
         for (int i = 0; i < scenarioArgs[3]; i++) {
-            while (occupied.contains(row + "," + col)) {
-                row = rand.nextInt(scenarioArgs[4]);
-                col = rand.nextInt(scenarioArgs[5]);
-            }
-            scenario.addStarAtlasArgs(row, col, i, new int[] { 1, 2, 3, 4 },
-                    new String[] { "hel" + i, "lo" + i, "wor" + i, "ld" + i });
-            occupied.add(row + "," + col);
+            scenario.addStarAtlasArgs(getAvailableLoc(row, col, false)[0], getAvailableLoc(row, col, false)[1], i,
+                    new int[] { 1, 2, 3, 4 }, new String[] { "hel" + i, "lo" + i, "wor" + i, "ld" + i });
         }
+
         TFace tFace = TFace.instance();
         tFace.setSurfaceSize(scenario.sufaceRowSize, scenario.sufaceColSize);
         scenario.createInstances();
         TFace.instance().updateDisplayHashMap();
-
     }
 
     public static void nextFrame() {
@@ -105,7 +96,6 @@ public class Simulator {
                 scenario.inhibitantList.get(1).setWalkDirections(3);
             }
         }
-
         TFace.instance().updateDisplayHashMap();
 
     }

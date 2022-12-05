@@ -36,5 +36,5 @@ public abstract class Base implements Locatable {
     public String getBID() {
         return bID;
     }
-    
+
 }
