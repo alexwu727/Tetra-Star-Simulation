@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class SimulationWindow {
     ImageIcon roverWoman;
     JPanel mapPanel;
     JLabel[][] canvas;
+    ArrayList<ImageIcon> roverList;
     int stepCount;
 
     SimulationWindow(String scene) {
@@ -74,9 +76,12 @@ public class SimulationWindow {
         cloneMap = new ImageIcon(((new ImageIcon("res/clone_map.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vader = new ImageIcon(((new ImageIcon("res/vader.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         vaderBase = new ImageIcon(((new ImageIcon("res/vader_base.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        roverMan = new ImageIcon(((new ImageIcon("res/man1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        roverWoman = new ImageIcon(((new ImageIcon("res/woman1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-
+        roverList = new ArrayList<>();
+        roverList.add(new ImageIcon(((new ImageIcon("res/man1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+        roverList.add(new ImageIcon(((new ImageIcon("res/woman1.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+        roverList.add(new ImageIcon(((new ImageIcon("res/man2.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+        roverList.add(new ImageIcon(((new ImageIcon("res/woman2.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+        roverList.add(new ImageIcon(((new ImageIcon("res/man3.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 
         nextAction.addActionListener(new ActionListener() {
             @Override
@@ -101,6 +106,7 @@ public class SimulationWindow {
     private void draw(JPanel mapPanel) {
 
         mapPanel.removeAll();
+        int roverCount = 0;
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -140,13 +146,10 @@ public class SimulationWindow {
                             case "River":
                                 crowded.add(new JLabel(river));
                                 break;
-                            case "TetRover4":
-                                crowded.add(new JLabel(roverMan));
+                            case "TetRover":
+                                crowded.add(new JLabel(roverList.get(roverCount%5)));
+                                roverCount++;
                                 break;
-                            case "TetRover5":
-                                crowded.add(new JLabel(roverWoman));
-                                break;
-
                         }
                     }
                     canvas[i][j] = crowded;
