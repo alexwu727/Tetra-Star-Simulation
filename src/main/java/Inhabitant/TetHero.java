@@ -21,7 +21,9 @@ public class TetHero extends Inhabitant {
 
     public TetHero(int row, int col, int tID) {
         super(row, col, tID);
-        // only on the edge
+    }
+
+    public void createBase() {
         heroBase = new HeroBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(heroBase);
     }
@@ -227,5 +229,4 @@ public class TetHero extends Inhabitant {
         }
         BackendConsole.addConsole(border);
     }
-
 }

@@ -27,9 +27,9 @@ public abstract class MapClass implements Locatable {
     protected HashMap<String, String> header;
     protected String body;
 
-    public MapClass() {
+    // public MapClass() {
 
-    }
+    // }
 
     public MapClass(int row, int col, int mID, boolean inAtlas) {
         this.row = row;
