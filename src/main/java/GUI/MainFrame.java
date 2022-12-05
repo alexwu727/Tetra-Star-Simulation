@@ -106,6 +106,7 @@ public class MainFrame{
                     int colSize = Integer.parseInt(colSizeInput.getText());
 
                     if (2 <= heroNum && heroNum <= 5 && 0 <= roverNum && roverNum <= 5 && 1 <= mapNum && mapNum <= 5 && 0 <= atlasNum && atlasNum <= 3 && 5 <= rowSize && rowSize <= 20 && 5 <= colSize && colSize <= 20) {
+                        errorMsg.setText("");
                         int[] args = {heroNum, roverNum, mapNum, atlasNum, rowSize, colSize};
                         BackendConsole.simulateScenario(5, args);
                         new SimulationWindow("Customize");
