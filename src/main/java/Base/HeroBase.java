@@ -1,19 +1,17 @@
 package main.java.Base;
 
-import main.java.Map.Map;
+import main.java.Map.MapClass;
 
 import java.util.ArrayList;
 
 public class HeroBase extends Base {
-    private ArrayList<Map> cloneMaps = null;
+    private ArrayList<MapClass> cloneMaps = new ArrayList<MapClass>();
 
     public HeroBase(int row, int col, String bID) {
         super(row, col, bID);
-        cloneMaps = new ArrayList<Map>();
-        this.setDisplayID("HeroBase");
     }
 
-    public void cloneMap(Map clonedMap) {
+    public void cloneMap(MapClass clonedMap) {
         if (clonedMap != null) {
             clonedMap.setRow(row);
             clonedMap.setCol(col);

@@ -3,10 +3,10 @@ package main.java.Base;
 import main.java.Locatable;
 
 public abstract class Base implements Locatable {
-    protected String displayID;
     protected int row;
     protected int col;
     protected String bID;
+    protected final String displayID = getClass().getSimpleName() + bID;
 
     public Base(int row, int col, String bID) {
         this.row = row;
@@ -38,12 +38,6 @@ public abstract class Base implements Locatable {
         return bID;
     }
 
-    @Override
-    public void setDisplayID(String displayID) {
-        this.displayID = displayID;
-    }
-
-    @Override
     public String getDisplayID() {
         return displayID;
     }

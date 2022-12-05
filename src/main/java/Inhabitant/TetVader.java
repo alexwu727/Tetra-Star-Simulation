@@ -6,9 +6,9 @@ import main.java.Base.HeroBase;
 import main.java.Base.MapBase;
 import main.java.Base.River;
 import main.java.Base.VaderBase;
-import main.java.Map.Map;
+import main.java.Map.MapClass;
 
-public class TetVader extends TetRover {
+public class TetVader extends Inhabitant {
     VaderBase vaderBase;
     Stack<int[]> moveStack = new Stack<>();
 
@@ -18,21 +18,17 @@ public class TetVader extends TetRover {
         vaderBase = new VaderBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(vaderBase);
         moveStack.push(new int[] { row, col });
-        this.setDisplayID("TetVader");
     }
 
-    @Override
     public boolean positionCheck(int row, int col) {
-        Locatable object = tFace.Surface[row][col];
-        return !(object instanceof TetRover || object instanceof HeroBase || object instanceof River);
+        Locatable object = tFace.surface[row][col];
+        return !(object instanceof Inhabitant || object instanceof HeroBase || object instanceof River);
     }
 
-    @Override
     public int nextActionEnterMapBase(MapBase mapBase) {
         return mapBase.hasMap() ? 1 : 0;
     }
 
-    @Override
     public void action() {
         switch (nextAction) {
             case 0:
@@ -40,20 +36,21 @@ public class TetVader extends TetRover {
                 moveStack.push(new int[] { getRow(), getCol() });
                 break;
             case 1:
-                actionToConsole("Steals the map in the map base.");
+
                 steal(((MapBase) tFace.getBase(getRow(), getCol())));
                 moveStack.pop();
                 break;
             case 2:
-                actionToConsole(" Backtracks.");
+
                 backtrack();
                 break;
         }
     }
 
     public void steal(MapBase mapBase) {
-        Map map = (Map) mapBase.getMap();
-        map.updateMapLocation(tFace.TetVaderBaseRow, tFace.TetVaderBaseCol);
+        MapClass map = (MapClass) mapBase.getMap();
+        actionToConsole("Steals " + map.getName() + " in the map base.");
+        map.updateMapLocation(tFace.tetVaderBaseRow, tFace.tetVaderBaseCol);
         mapBase.setMap(null);
         vaderBase.stealMap(map);
         this.nextAction = 2;
@@ -62,12 +59,14 @@ public class TetVader extends TetRover {
     public void backtrack() {
         int[] pos = moveStack.pop();
         // if there is a rover the the way back home, wait 1 round.
-        if (tFace.Surface[pos[0]][pos[1]] instanceof TetRover) {
+        if (tFace.surface[pos[0]][pos[1]] instanceof Inhabitant) {
             moveStack.push(pos);
+            actionToConsole(" Someone blocks the way, stands for one turn");
             return;
         }
+        actionToConsole(" Backtracks.");
         flyTo(pos[0], pos[1]);
-        if (tFace.TetVaderBaseRow == pos[0] && tFace.TetVaderBaseCol == pos[1]) {
+        if (tFace.tetVaderBaseRow == pos[0] && tFace.tetVaderBaseCol == pos[1]) {
             this.nextAction = 0;
             moveStack.push(new int[] { pos[0], pos[1] });
         }

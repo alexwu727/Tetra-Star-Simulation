@@ -5,11 +5,7 @@ public interface Locatable {
 
     public void setCol(int col);
 
-    public void setDisplayID(String displayID);
-
     public int getRow();
 
     public int getCol();
-
-    public String getDisplayID();
 }

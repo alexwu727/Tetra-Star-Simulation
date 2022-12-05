@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
 import main.java.Base.*;
-import main.java.Inhabitant.TetRover;
+import main.java.Inhabitant.Inhabitant;
+import main.java.Map.MapClass;
 
 public class TFace {
     private static TFace singleton = null;
     private int rowSize;
     private int colSize;
-    public Locatable Surface[][];
+    public Locatable surface[][];
     public HashMap<String, List<String>> displayHashMap = new HashMap<String, List<String>>();
-    public Map<String, Base> baseMap = new HashMap<String, Base>();
-    public Map<String, String> mapMap = new HashMap<String, String>();
-    public int TetVaderBaseRow;
-    public int TetVaderBaseCol;
+    private Map<String, Base> baseHashMap = new HashMap<String, Base>();
+    private Map<String, MapClass> mapHashMap = new HashMap<String, MapClass>();
+    private VaderBase vaderBase;
+    public int tetVaderBaseRow;
+    public int tetVaderBaseCol;
 
     private TFace() {
 
@@ -43,33 +44,44 @@ public class TFace {
         return colSize;
     }
 
+    public void setSurfaceSize(int row, int col) {
+        this.rowSize = row;
+        this.colSize = col;
+        surface = new Locatable[row][col];
+    }
+
+    public VaderBase getVaderBase() {
+        return vaderBase;
+    }
+
     public void addObject(Locatable object) {
         int row = object.getRow();
         int col = object.getCol();
-        Surface[row][col] = object;
+        surface[row][col] = object;
     }
 
     public void removeObject(Locatable object) {
         int row = object.getRow();
         int col = object.getCol();
         String key = convertToKey(object.getRow(), object.getCol());
-        Surface[row][col] = baseMap.containsKey(key) ? baseMap.get(key) : null;
+        surface[row][col] = baseHashMap.containsKey(key) ? baseHashMap.get(key) : null;
     }
 
     public void addBase(Base base) {
         int row = base.getRow();
         int col = base.getCol();
-        baseMap.put(base.getBID(), base);
+        baseHashMap.put(base.getBID(), base);
         if (base instanceof VaderBase) {
+            vaderBase = (VaderBase) base;
             addRiver(row, col);
-            this.TetVaderBaseRow = row;
-            this.TetVaderBaseCol = col;
+            this.tetVaderBaseRow = row;
+            this.tetVaderBaseCol = col;
         }
     }
 
     public Base getBase(int row, int col) {
         String key = convertToKey(row, col);
-        return (Base) baseMap.get(key);
+        return (Base) baseHashMap.get(key);
     }
 
     public void addRiver(int vbRow, int vbCol) {
@@ -84,9 +96,16 @@ public class TFace {
             }
             River river = new River(row, col, convertToKey(row, col));
             addBase(river);
-            Surface[row][col] = river;
+            surface[row][col] = river;
         }
+    }
 
+    public void addMap(int row, int col, MapClass map) {
+        mapHashMap.put(convertToKey(row, col), map);
+    }
+
+    public void removeMap(int row, int col) {
+        mapHashMap.remove(convertToKey(row, col));
     }
 
     public String convertToKey(int row, int col) {
@@ -95,31 +114,26 @@ public class TFace {
         return sb.toString();
     }
 
-    public void setSurfaceSize(int row, int col) {
-        this.rowSize = row;
-        this.colSize = col;
-        Surface = new Locatable[row][col];
-    }
-
     public void updateDisplayHashMap() {
         displayHashMap = new HashMap<String, List<String>>();
         // bases
-        for (Map.Entry<String, Base> entry : baseMap.entrySet()) {
+        for (Map.Entry<String, Base> entry : baseHashMap.entrySet()) {
             List<String> displayList = new ArrayList<>();
-            displayList.add(entry.getValue().getDisplayID());
+            displayList.add(entry.getValue().getClass().getSimpleName());
             displayHashMap.put(entry.getKey(), displayList);
         }
 
-        // rovers
-        for (int i = 0; i < Surface.length; i++) {
-            for (int j = 0; j < Surface[0].length; j++) {
-                if (Surface[i][j] instanceof TetRover) {
+        // inhabitants
+        for (int i = 0; i < surface.length; i++) {
+            for (int j = 0; j < surface[0].length; j++) {
+                if (surface[i][j] instanceof Inhabitant) {
+                    String name = surface[i][j].getClass().getSimpleName();
                     String key = convertToKey(i, j);
-                    if (displayHashMap.containsKey(convertToKey(i, j))) {
-                        displayHashMap.get(key).add(Surface[i][j].getDisplayID());
+                    if (displayHashMap.containsKey(key)) {
+                        displayHashMap.get(key).add(name);
                     } else {
                         List<String> displayList = new ArrayList<>();
-                        displayList.add(Surface[i][j].getDisplayID());
+                        displayList.add(name);
                         displayHashMap.put(key, displayList);
                     }
                 }
@@ -127,26 +141,16 @@ public class TFace {
         }
 
         // maps
-        for (Map.Entry<String, String> entry : mapMap.entrySet()) {
+        for (Map.Entry<String, MapClass> entry : mapHashMap.entrySet()) {
+            MapClass map = entry.getValue();
+            String name = map.isClone() ? "CloneMap" : map.getClass().getSimpleName();
             if (displayHashMap.containsKey(entry.getKey())) {
-                displayHashMap.get(entry.getKey()).add(entry.getValue());
+                displayHashMap.get(entry.getKey()).add(name);
             } else {
                 List<String> displayList = new ArrayList<>();
-                displayList.add(entry.getValue());
+                displayList.add(name);
                 displayHashMap.put(entry.getKey(), displayList);
             }
         }
     }
-
-    // public void printSurface() {
-    // for (int i = 0; i < rowSize; i++) {
-    // for (int j = 0; j < colSize; j++) {
-    // String displayID = Surface[i][j] == null ? "0" :
-    // Surface[i][j].getDisplayID();
-    // System.out.print(displayID + " ");
-    // }
-    // System.out.println();
-    // }
-    // }
-
 }

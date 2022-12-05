@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class Map implements Locatable {
+public abstract class MapClass implements Locatable {
     protected int mID;
     protected int row;
     protected int col;
-    protected String displayID;
+    protected String name = getClass().getSimpleName() + mID;
     protected TFace tFace = TFace.instance();
     protected MapBase mapBase;
     protected int itemCount;
     protected String text;
     protected boolean isEncrypted;
+    protected boolean isClone = false;
     protected String encryptSymbol = "*";
     protected int encryptHeroID;
     protected int restorationCounter = 0;
@@ -26,27 +27,32 @@ public abstract class Map implements Locatable {
     protected HashMap<String, String> header;
     protected String body;
 
-    public Map() {
+    public MapClass() {
 
     }
 
-    public Map(int row, int col, int mID) {
+    public MapClass(int row, int col, int mID, boolean inAtlas) {
         this.row = row;
         this.col = col;
         this.mID = mID;
-        this.itemCount = 0;
-        mapBase = new MapBase(row, col, tFace.convertToKey(row, col));
-        mapBase.setMap(this);
-        mapBase.setMapID(mID);
-        tFace.addBase(mapBase);
-        tFace.addObject(mapBase);
+        if (!inAtlas) {
+            mapBase = new MapBase(row, col, tFace.convertToKey(row, col));
+            mapBase.setMap(this);
+            mapBase.setMapID(mID);
+            tFace.addBase(mapBase);
+            tFace.addObject(mapBase);
+            tFace.addMap(row, col, this);
+        }
+
     }
 
-    public Map(Map map) {
+    public MapClass(MapClass map) {
         if (map != null) {
             this.mapBase = map.mapBase;
             this.mID = map.mID;
             this.text = map.text;
+            this.isClone = true;
+            this.name = map.name + " (Clone)";
             this.isEncrypted = map.isEncrypted;
             this.encryptSymbol = map.encryptSymbol;
             this.encryptHeroID = map.encryptHeroID;
@@ -57,7 +63,7 @@ public abstract class Map implements Locatable {
         }
     }
 
-    public abstract Map clone();
+    public abstract MapClass clone();
 
     public void setRow(int row) {
         this.row = row;
@@ -89,6 +95,10 @@ public abstract class Map implements Locatable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean isClone() {
+        return isClone;
     }
 
     public boolean isEncrypted() {
@@ -127,19 +137,15 @@ public abstract class Map implements Locatable {
         heroList.add(tetHero.getTID());
     }
 
-    public void setDisplayID(String displayID) {
-        this.displayID = displayID;
-    }
-
-    public String getDisplayID() {
-        return displayID;
+    public String getName() {
+        return name;
     }
 
     public void updateMapLocation(int row, int col) {
-        tFace.mapMap.remove(tFace.convertToKey(getRow(), getCol()));
+        tFace.removeMap(getRow(), getCol());
         setRow(row);
         setCol(col);
-        tFace.mapMap.put(tFace.convertToKey(row, col), getDisplayID());
+        tFace.addMap(row, col, this);
     }
 
 }

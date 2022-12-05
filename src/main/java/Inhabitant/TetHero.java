@@ -2,7 +2,7 @@ package main.java.Inhabitant;
 
 import main.java.Map.StarAtlas;
 import main.java.Map.StarMap;
-import main.java.Map.Map;
+import main.java.Map.MapClass;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ import main.java.Base.MapBase;
 import main.java.Base.River;
 import main.java.Base.VaderBase;
 
-public class TetHero extends TetRover {
+public class TetHero extends Inhabitant {
     boolean tFlier;
-    int cipherKey = 9;
-    int findMapID;
+    private int cipherKey = 9;
+    private int findMapID;
     HeroBase heroBase;
 
     public TetHero(int row, int col, int tID) {
@@ -24,16 +24,13 @@ public class TetHero extends TetRover {
         // only on the edge
         heroBase = new HeroBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(heroBase);
-        this.setDisplayID("TetHero");
     }
 
-    @Override
     public boolean positionCheck(int row, int col) {
-        Locatable object = tFace.Surface[row][col];
-        return !(object instanceof TetRover || object instanceof River);
+        Locatable object = tFace.surface[row][col];
+        return !(object instanceof Inhabitant || object instanceof River);
     }
 
-    @Override
     public int nextActionEnterMapBase(MapBase mapBase) {
         if (mapBase.hasMap()) {
             return 1;
@@ -42,7 +39,6 @@ public class TetHero extends TetRover {
         return 2;
     }
 
-    @Override
     public void action() {
         switch (nextAction) {
             case 0:
@@ -55,8 +51,8 @@ public class TetHero extends TetRover {
                 requestTFlier();
                 break;
             case 3:
-                flyTo(tFace.TetVaderBaseRow, tFace.TetVaderBaseCol);
-                actionToConsole("Flies to tetVaderBase and check if the map is there.");
+                flyTo(tFace.tetVaderBaseRow, tFace.tetVaderBaseCol);
+                actionToConsole("Flies to the vader base");
                 check(findMapID);
                 break;
             case 4:
@@ -67,36 +63,43 @@ public class TetHero extends TetRover {
         }
     }
 
-    public void actionToMapInMapBase(Map map) {
+    public void actionToMapInMapBase(MapClass map) {
+        String temp1;
+        String temp2;
         if (map.isEncrypted()) {
             if (map.getEncryptHeroID() != tID) {
                 map.addHero(this);
-                actionToConsole(
-                        "Map in the map base is already encrypted by other hero, adds id to the header and displays encrypted content.");
+                temp1 = "already encrypted by other hero, adds id to its header and";
+                temp2 = "encrypted content.";
             } else {
-                actionToConsole(
-                        "Map in the map base is already encrypted by me, displays the decrpyted map in the map base.");
+                temp1 = "already encrypted by me,";
+                temp2 = "decrpyted content.";
             }
         } else {
-            actionToConsole("Displays unencrypted map in the map base.");
+            temp1 = "not encrypted,";
+            temp2 = "unencrypted content.";
         }
+        actionToConsole(map.getName() + " in the map base is " + temp1 + " displays the " + temp2);
         display(map);
         this.nextAction = 0;
     }
 
-    public void display(Map map) {
+    public void display(MapClass map) {
         if (map instanceof StarAtlas) {
             StarAtlas atlas = (StarAtlas) map;
             List<StarMap> starMaps = atlas.getStarMaps();
-            BackendConsole.addConsole("" + starMaps.size());
             for (StarMap starMap : starMaps) {
                 display(starMap);
             }
         } else {
+            String message;
             printSymbol(map.getEncryptSymbol());
             String Date = "Dec 2022";
             BackendConsole.addConsole("ID: " + map.getEncryptHeroID() + " Date: " + Date + " (Tetra Time)");
-            String message = map.getText();
+            message = map.getText();
+            if (map.getEncryptHeroID() == tID) {
+                message = caesarCipher(message, -cipherKey);
+            }
             BackendConsole.addConsole("Text: " + message);
             printSymbol(map.getEncryptSymbol());
         }
@@ -116,8 +119,9 @@ public class TetHero extends TetRover {
     }
 
     public void check(int findMapID) {
-        String key = tFace.convertToKey(getRow(), getCol());
-        if (((VaderBase) tFace.baseMap.get(key)).getStolenMaps().containsKey(findMapID)) {
+        if (tFace.getVaderBase().getStolenMaps().containsKey(findMapID)) {
+            MapClass map = tFace.getVaderBase().getMap(findMapID);
+            actionToConsole("Found " + map.getName() + " in the vader base.");
             this.nextAction = 4;
         } else {
             this.nextAction = 0;
@@ -127,21 +131,22 @@ public class TetHero extends TetRover {
 
     public void actionToMapInVaderBase() {
         this.tFlier = false;
-        String key = tFace.convertToKey(getRow(), getCol());
-        VaderBase vaderBase = (VaderBase) tFace.baseMap.get(key);
-        Map map = vaderBase.removeMap(findMapID);
+        VaderBase vaderBase = tFace.getVaderBase();
+        MapClass map = vaderBase.removeMap(findMapID);
         cloneMap(map);
         restore(map);
-        actionToConsole("Clones and restores the map in the vader base.");
+        actionToConsole("Clones and restores " + map.getName() + " in the vader base.");
         if (!map.isEncrypted()) {
             encrypt(map);
-            actionToConsole("Encrypts the map in the vader base.");
+            actionToConsole("Encrypts " + map.getName() + " in the vader base.");
         } else if (map.getEncryptHeroID() != tID) {
             map.addHero(this);
-            actionToConsole("Map in the vader base is already encrypted by other hero, adds id to the header.");
+            actionToConsole(
+                    map.getName() + " is already encrypted by other hero, adds id to the header.");
         } else {
             incrementRestorationCounter(map);
-            actionToConsole("Map in the vader base is already encrypted, increments the restoration_counter.");
+            actionToConsole(
+                    map.getName() + " is already encrypted, increments the restoration_counter.");
         }
         this.nextAction = 0;
     }
@@ -164,7 +169,7 @@ public class TetHero extends TetRover {
         return result.toString();
     }
 
-    public void encrypt(Map map) {
+    public void encrypt(MapClass map) {
         if (map instanceof StarAtlas) {
             StarAtlas atlas = (StarAtlas) map;
             List<StarMap> starMaps = atlas.getStarMaps();
@@ -180,7 +185,7 @@ public class TetHero extends TetRover {
 
     }
 
-    public void decrypt(Map map) {
+    public void decrypt(MapClass map) {
         if (map instanceof StarAtlas) {
             StarAtlas atlas = (StarAtlas) map;
             List<StarMap> starMaps = atlas.getStarMaps();
@@ -195,21 +200,19 @@ public class TetHero extends TetRover {
         }
     }
 
-    public void restore(Map map) {
+    public void restore(MapClass map) {
         MapBase mapBase = map.getMapBase();
         map.updateMapLocation(mapBase.getRow(), mapBase.getCol());
         mapBase.setMap(map);
     }
 
-    public void cloneMap(Map map) {
-        Map clonedMap = map.clone();
-        clonedMap.setDisplayID("CloneMap");
+    public void cloneMap(MapClass map) {
+        MapClass clonedMap = map.clone();
         heroBase.cloneMap(clonedMap);
-        tFace.mapMap.put(tFace.convertToKey(clonedMap.getRow(), clonedMap.getCol()), clonedMap.getDisplayID());
-
+        tFace.addMap(clonedMap.getRow(), clonedMap.getCol(), clonedMap);
     }
 
-    public void incrementRestorationCounter(Map map) {
+    public void incrementRestorationCounter(MapClass map) {
         map.setRestorationCounter(map.getRestorationCounter() + 1);
     }
 
@@ -219,7 +222,7 @@ public class TetHero extends TetRover {
 
     private void printSymbol(String symbol) {
         String border = "";
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 50; i++) {
             border += symbol;
         }
         BackendConsole.addConsole(border);
