@@ -10,7 +10,6 @@ import main.java.Base.MapBase;
 
 public abstract class Inhabitant implements Locatable {
     protected int tID;
-    private final String displayID;
     protected int row;
     protected int col;
     protected int nextAction;
@@ -23,12 +22,7 @@ public abstract class Inhabitant implements Locatable {
         this.row = row;
         this.col = col;
         this.tID = tID;
-        this.displayID = getClass().getSimpleName() + tID;
         tFace.addObject(this);
-    }
-
-    public String getDisplayID() {
-        return displayID;
     }
 
     public int getTID() {
