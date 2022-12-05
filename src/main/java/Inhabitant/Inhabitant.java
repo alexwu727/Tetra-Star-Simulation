@@ -45,6 +45,8 @@ public abstract class Inhabitant implements Locatable {
         this.col = c;
     }
 
+    public abstract void createBase();
+
     public abstract void action();
 
     public void walk() {
@@ -144,4 +146,5 @@ public abstract class Inhabitant implements Locatable {
     public void actionToConsole(String text) {
         BackendConsole.addConsole(getClass().getSimpleName() + tID + ": " + text);
     }
+
 }

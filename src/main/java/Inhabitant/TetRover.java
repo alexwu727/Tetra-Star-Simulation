@@ -8,6 +8,9 @@ public class TetRover extends Inhabitant {
         super(row, col, tID);
     }
 
+    public void createBase() {
+    }
+
     public boolean positionCheck(int row, int col) {
         return !(tFace.surface[row][col] instanceof Locatable);
     }

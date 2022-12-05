@@ -15,9 +15,12 @@ public class TetVader extends Inhabitant {
     public TetVader(int row, int col, int tID) {
         super(row, col, tID);
         this.tFlier = true;
+        moveStack.push(new int[] { row, col });
+    }
+
+    public void createBase() {
         vaderBase = new VaderBase(row, col, tFace.convertToKey(row, col));
         tFace.addBase(vaderBase);
-        moveStack.push(new int[] { row, col });
     }
 
     public boolean positionCheck(int row, int col) {

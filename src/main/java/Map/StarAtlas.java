@@ -6,9 +6,9 @@ import java.util.List;
 public class StarAtlas extends MapClass {
     List<StarMap> starMaps = new ArrayList<StarMap>();
 
-    public StarAtlas() {
+    // public StarAtlas() {
 
-    }
+    // }
 
     public StarAtlas(int row, int col, int mID, int[] mIDs, String[] texts) {
         super(row, col, mID, false);
