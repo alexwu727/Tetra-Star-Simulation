@@ -1,16 +1,17 @@
 package main.java;
 
-import main.java.Inhabitant.TetRover;
+import main.java.Inhabitant.Inhabitant;
 
 import java.util.HashMap;
 
 public class Simulator {
     static Scenario scenario;
     static int currentScenarioIndex;
-    static int helper = 10;
+    static int helper;
     private static HashMap<Integer, Scenario> scenarioHashMap = new HashMap<Integer, Scenario>();
 
     public static void start(int scenarioIndex) {
+        helper = 15;
         TFace.clear();
         scenario = scenarioHashMap.get(scenarioIndex);
         currentScenarioIndex = scenarioIndex;
@@ -21,14 +22,17 @@ public class Simulator {
     }
 
     public static void nextFrame() {
-        helper -= 1;
-        for (TetRover tetRover : scenario.inhibitantList) {
-            tetRover.action();
+        for (Inhabitant inhabitant : scenario.inhibitantList) {
+            inhabitant.action();
         }
-        if (helper == 0 && currentScenarioIndex == 3) {
-            scenario.inhibitantList.get(0).setWalkDirections(1);
-            scenario.inhibitantList.get(1).setWalkDirections(3);
+        if (currentScenarioIndex == 3) {
+            helper--;
+            if (helper == 0) {
+                scenario.inhibitantList.get(0).setWalkDirections(1);
+                scenario.inhibitantList.get(1).setWalkDirections(3);
+            }
         }
+
         TFace.instance().updateDisplayHashMap();
 
     }
@@ -65,7 +69,7 @@ public class Simulator {
         scenario.sufaceColSize = 10;
         scenario.addTetHeroArgs(3, 0, 1, 4);
         scenario.addTetVaderArgs(9, 3, 2, 1);
-        scenario.addStarMapArgs(3, 3, 0, "hello world");
+        scenario.addStarAtlasArgs(3, 3, 0, new int[] { 1, 2, 3, 4 }, new String[] { "hel", "lo", "wor", "ld" });
         scenarioHashMap.put(1, scenario);
 
         // scenario 2 - hero enters the mapbase without a map
