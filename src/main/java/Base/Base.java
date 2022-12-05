@@ -6,7 +6,6 @@ public abstract class Base implements Locatable {
     protected int row;
     protected int col;
     protected String bID;
-    protected final String displayID = getClass().getSimpleName() + bID;
 
     public Base(int row, int col, String bID) {
         this.row = row;
@@ -37,9 +36,5 @@ public abstract class Base implements Locatable {
     public String getBID() {
         return bID;
     }
-
-    public String getDisplayID() {
-        return displayID;
-    }
-
+    
 }

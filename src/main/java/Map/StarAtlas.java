@@ -7,7 +7,6 @@ public class StarAtlas extends MapClass {
     List<StarMap> starMaps = new ArrayList<StarMap>();
 
 
-
     public StarAtlas(int row, int col, int mID, int[] mIDs, String[] texts) {
         super(row, col, mID, false);
         for (int i = 0; i < mIDs.length; i++) {
